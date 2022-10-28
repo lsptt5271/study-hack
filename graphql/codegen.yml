@@ -1,0 +1,21 @@
+schema: src/schema.graphql
+documents: src/documents/**/*.graphql
+
+generates:
+  ../server/src/graphqls/resolvers/type.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      mappers:
+        Study: ../model#StudyModel
+      contextType: ../context#Context
+  ../client/src/repositories/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher: graphql-request
+      isReactHook: true
+      exposeQueryKeys: true

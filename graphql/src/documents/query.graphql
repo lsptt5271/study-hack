@@ -1,0 +1,6 @@
+query getStudies {
+  studies {
+    id
+    name
+  }
+}
