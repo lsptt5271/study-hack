@@ -1,17 +1,20 @@
-version: '3'
+version: "3"
 services:
-  node:
-    container_name: node
+  app:
+    container_name: study_hack_app
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ..:/usr/local/app
-    tty:  true
+    tty: true
     ports:
       - 3000:3000
-  postgres:
-    container_name: postgres
+      - 3001:3001
+    environment:
+      DB_URL: db:5432
+  db:
+    container_name: study_hack_db
     image: postgres:13
     ports:
       - 5432:5432
@@ -21,6 +24,15 @@ services:
       POSTGRES_DB: study_hack
     volumes:
       - db_data:/var/lib/posrgresql/data
-
+  www:
+    container_name: study_hack_www
+    image: httpd:2.4
+    ports:
+      - 80:80
+    volumes:
+      - ../httpd.conf:/usr/local/apache2/conf/httpd.conf
+    environment:
+      PROXY_PATH_API: /study_hack_api
+      PROXY_URL_API: http://app:3001/study_hack_api
 volumes:
   db_data:

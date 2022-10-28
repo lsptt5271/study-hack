@@ -1,7 +1,7 @@
 {
     "name": "StudyHack Devcontainer",
     "dockerComposeFile": "./docker-compose.yml",
-    "service": "node",
+    "service": "app",
     "workspaceFolder": "/usr/local/app",
     "extensions": [
         "dbaeumer.vscode-eslint",
