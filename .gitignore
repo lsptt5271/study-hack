@@ -1,3 +1,9 @@
 */node_modules
 
+client/src/repositories/graphql.ts
+client/.next
+
 server/logs
+server/tmp
+server/dist
+server/src/graphqls/resolvers/type.ts

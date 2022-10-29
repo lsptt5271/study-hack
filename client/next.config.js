@@ -1,6 +1,6 @@
-const basePath = '/mobile';
-const apiDomain = '172.20.2.24';
-const apiBasePath = '/mobile_api';
+const basePath = '/study_hack';
+const apiDomain = 'localhost:3001';
+const apiBasePath = '/study_hack_api';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -9,7 +9,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     basePath,
     apiBasePath,
-    apiDestination: `http://${apiDomain}:3001${apiBasePath}`,
+    apiDestination: `http://${apiDomain}${apiBasePath}`,
   },
 };
 

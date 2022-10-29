@@ -32,6 +32,8 @@ services:
     volumes:
       - ../httpd.conf:/usr/local/apache2/conf/httpd.conf
     environment:
+      PROXY_PATH: /study_hack
+      PROXY_URL: http://app:3000/study_hack
       PROXY_PATH_API: /study_hack_api
       PROXY_URL_API: http://app:3001/study_hack_api
 volumes:
