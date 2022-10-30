@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body,
+  button,
+  input,
+  select,
+  textarea {
+    @apply font-base;
+  }
+
+  body {
+    @apply text-xs;
+    @apply bg-body;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    @apply text-sm;
+  }
+}
+
+@layer utilities {
+  .flexible {
+    @apply flex items-center;
+  }
+
+  .flexible-center {
+    @apply flexible justify-center;
+  }
+
+  .flexible-justify {
+    @apply flexible justify-between;
+  }
+
+  .primary-border {
+    @apply border border-base border-solid;
+  }
+}

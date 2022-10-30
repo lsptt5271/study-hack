@@ -1,6 +1,9 @@
+import { AppProps } from 'next/app';
+
+import '@/styles/globals.css';
+
 import { Auth } from '@/@types';
 import { AuthProvider } from '@/providers/auth';
-import { AppProps } from 'next/app';
 
 export type PageProps = {
   auth?: Auth | null;

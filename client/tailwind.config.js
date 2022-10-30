@@ -13,19 +13,24 @@ module.exports = {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
       },
+      backgroundColor: {
+        body: 'var(--color-body)',
+      },
       height: {
         header: 'var(--size-header-height)',
         headernav: 'var(--size-header-height-with-nav)',
       },
       borderColor: {
         base: 'var(--color-border)',
+        form: '#ddd'
       },
       variables: {
         DEFAULT: {
           color: {
-            primary: '#314054',
+            primary: '#ff4b23',
             secondary: '#7992a8',
             border: '#9d9d9d',
+            body: '#11233d',
           },
           size: {
             'header-height': '48px',
