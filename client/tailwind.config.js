@@ -14,7 +14,10 @@ module.exports = {
         secondary: 'var(--color-secondary)',
       },
       backgroundColor: {
-        body: 'var(--color-body)',
+        base: 'var(--color-back)',
+      },
+      textColor: {
+        base: 'var(--color-fore)',
       },
       height: {
         header: 'var(--size-header-height)',
@@ -27,10 +30,11 @@ module.exports = {
       variables: {
         DEFAULT: {
           color: {
-            primary: '#ff4b23',
-            secondary: '#7992a8',
+            primary: '#111',
+            secondary: '#ff4b23',
             border: '#9d9d9d',
-            body: '#11233d',
+            back: '#11233d',
+            fore: '#fff',
           },
           size: {
             'header-height': '48px',

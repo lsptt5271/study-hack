@@ -4,6 +4,7 @@ import '@/styles/globals.css';
 
 import { Auth } from '@/@types';
 import { AuthProvider } from '@/providers/auth';
+import { AppProvider } from '@/providers/app';
 
 export type PageProps = {
   auth?: Auth | null;
@@ -13,9 +14,9 @@ const App = ({ Component, pageProps }: AppProps) => {
   const props = pageProps as PageProps;
 
   return (
-    <AuthProvider auth={props.auth}>
+    <AppProvider auth={props.auth}>
       <Component {...pageProps} />
-    </AuthProvider>
+    </AppProvider>
   );
 };
 

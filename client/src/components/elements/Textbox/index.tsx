@@ -1,5 +1,15 @@
-type TextboxProps = JSX.IntrinsicElements['input'];
+import { ComponentPropsWithoutRef, forwardRef, useCallback, useMemo } from 'react';
+import { overrideTailwindClasses } from 'tailwind-override';
 
-export const Textbox = (props: TextboxProps) => {
-  return <input type="text" className={`w-[100px] ${props.className || ''}`} {...props} />;
+type TextboxProps = ComponentPropsWithoutRef<'input'> & {
+  error?: boolean;
 };
+
+export const Textbox = forwardRef<HTMLInputElement, TextboxProps>(({ error = false, ...props }, ref) => {
+  const dynamicStyle = useMemo(() => {
+    return error ? 'border-rose-600' : 'border-white';
+  }, [error]);
+  return <input type="text" {...props} ref={ref} className={overrideTailwindClasses(`rounded border-[1px] p-2 outline-none ${dynamicStyle} ${props.className}`)} />;
+});
+
+Textbox.displayName = 'Textbox';

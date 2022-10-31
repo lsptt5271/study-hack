@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 
 import config from '@/configs';
+import { User } from '@/@types';
 
-export const sign = (user: Express.User | undefined) => {
+export const sign = (user: User) => {
   const payload = { user };
   const exp = Math.floor(Date.now() / 1000) + config.jwt_max_age;
 

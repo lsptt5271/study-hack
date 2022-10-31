@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import passport from '@/auths/index';
 import { sign } from '@/auths/jwt';
+import { User } from '@/@types';
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.post(
     session: false,
   }),
   (req, res, next) => {
-    res.json({ ...sign(req.user) });
+    res.json({ ...sign(req.user as User) });
   }
 );
 

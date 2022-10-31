@@ -1,11 +1,10 @@
+import { ApiDestination } from '@/commons/constant';
 import { GraphQLClient } from 'graphql-request';
 
-import getApiDestination from '@/utils/get-api-destination';
+const graphqlClient = new GraphQLClient(ApiDestination.concat('/graphql'));
 
-const graphqlClient = new GraphQLClient(getApiDestination().concat('/graphql'));
-
-export const getGraphqlClient = (token: string) => {
-  graphqlClient.setHeader('authorization', `Bearer ${token}`);
+export const getGraphqlClient = (token?: string) => {
+  if (token) graphqlClient.setHeader('authorization', `Bearer ${token}`);
 
   return graphqlClient;
 };

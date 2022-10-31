@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply text-xs text-base bg-base h-full;
+  }
+
   body,
   button,
   input,
@@ -11,16 +19,15 @@
     @apply font-base;
   }
 
-  body {
-    @apply text-xs;
-    @apply bg-body;
-  }
-
   button,
   input,
   select,
   textarea {
-    @apply text-sm;
+    @apply text-sm text-black;
+  }
+
+  #__next {
+    @apply h-full flex flex-col;
   }
 }
 

@@ -3,6 +3,27 @@ type Study {
   name: String!
 }
 
+type User {
+  name: String!
+  loginId: String!
+}
+
+type Auth {
+  user: User!
+  exp: Int!
+  token: String!
+}
+
+input CreateUserInput {
+  name: String!
+  loginId: String!
+  loginPassword: String!
+}
+
 type Query {
   studies: [Study!]!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): Auth!
 }
