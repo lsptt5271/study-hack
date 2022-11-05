@@ -16,17 +16,42 @@ datasource db {
 }
 
 model User {
+  id             Int        @id @default(autoincrement())
+  name           String     @unique @db.VarChar(128)
+  login_id       String     @unique @db.VarChar(128)
+  login_password String     @db.VarChar(512)
+  categories     Category[] @relation("user_fk_category")
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Category {
   id             Int      @id @default(autoincrement())
-  name           String   @unique
-  login_id       String   @unique
-  login_password String
+  name           String   @unique @db.VarChar(128)
+  user_id        Int
+  user           User     @relation(name: "user_fk_category", fields: [user_id], references: [id])
+  menus          Menu[]   @relation("category_fk_menu")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Menu {
+  id             Int      @id @default(autoincrement())
+  name           String   @unique @db.VarChar(128)
+  category_id    Int
+  category       Category @relation(name: "category_fk_menu", fields: [category_id], references: [id])
+  studies        Study[]  @relation("menu_fk_study")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
 model Study {
   id             Int      @id @default(autoincrement())
-  name           String
+  name           String   @unique @db.VarChar(128)
+  start_at       DateTime
+  end_at         DateTime
+  menu_id        Int
+  menu           Menu     @relation(name: "menu_fk_study", fields: [menu_id], references: [id])
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

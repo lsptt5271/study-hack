@@ -3,6 +3,7 @@ import { parseCookies } from 'nookies';
 
 import axios from '@/libs/axios';
 import { AuthResponse } from '@/@types';
+import { PagePath } from '@/commons/constant';
 
 const getAuth = async (context: GetServerSidePropsContext, redirectOnFail: boolean) => {
   const cookies = parseCookies(context);
@@ -15,7 +16,16 @@ const getAuth = async (context: GetServerSidePropsContext, redirectOnFail: boole
       },
     });
 
+    console.log(context);
+
     return {
+      redirect:
+        context.resolvedUrl === PagePath.Index
+          ? undefined
+          : {
+              permanent: false,
+              destination: PagePath.Index,
+            },
       props: {
         auth: {
           ...auth,
@@ -29,9 +39,8 @@ const getAuth = async (context: GetServerSidePropsContext, redirectOnFail: boole
       return {
         redirect: {
           permanent: false,
-          destination: '/login?status=session',
+          destination: PagePath.Login.concat('?status=session'),
         },
-
         props: {} as never,
       };
     } else {

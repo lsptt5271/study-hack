@@ -1,9 +1,14 @@
+import { ChangeEvent, FormEvent, useCallback } from 'react';
+import { useRouter } from 'next/router';
+
 import { PrimaryButton } from '@/components/elements/PrimaryButton';
 import { Textbox } from '@/components/elements/Textbox';
-import { ChangeEvent, FormEvent, useCallback } from 'react';
-import { useLogin } from '../../hooks/login';
+import { useLogin } from '@/features/login/hooks/login';
+import { PagePath } from '@/commons/constant';
+import { LoginHint } from '../LoginHint';
 
 export const LoginForm = () => {
+  const router = useRouter();
   const { loginVariables, setLoginVariables, executeLogin } = useLogin();
 
   const onChageLoginId = useCallback(
@@ -36,16 +41,24 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmit} className={'w-[360px] rounded-lg bg-primary p-8'}>
-      <div>
+      <div className={'mb-2'}>
+        <LoginHint />
+      </div>
+      <div className={'mb-2'}>
         <p>ユーザID</p>
         <Textbox className="w-full" value={loginVariables.loginId} onChange={onChageLoginId} />
       </div>
-      <div>
+      <div className={'mb-4'}>
         <p>パスワード</p>
         <Textbox type="password" className="w-full" value={loginVariables.loginPassword} onChange={onChangeLoginPassword} />
       </div>
-      <div>
+      <div className={'mb-4'}>
         <PrimaryButton className="w-full">ログイン</PrimaryButton>
+      </div>
+      <div className={'text-right'}>
+        <p className={'cursor-pointer underline'} onClick={() => router.push(PagePath.Signup)}>
+          アカウントをお持ちでない方
+        </p>
       </div>
     </form>
   );

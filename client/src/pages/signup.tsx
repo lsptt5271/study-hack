@@ -4,10 +4,12 @@ import getAuth from '@/utils/get-auth';
 import { PageProps } from '@/pages/_app';
 import { SignupForm } from '@/features/signup/components/SignupForm';
 import { PageMain } from '@/components/layouts/PageMain';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 const SignupPage = () => {
   return (
     <>
+      <PageHeader plain={true} />
       <PageMain>
         <section className={'flexible-center h-full'}>
           <SignupForm />

@@ -5,7 +5,7 @@ import { CreateUserInput } from '@/graphqls/resolvers/type';
 
 const userProvider = () => {
   const findOneByLoginId = async (loginId: string) => {
-    return await client.user.findUniqueOrThrow({
+    return await client.user.findUnique({
       where: {
         login_id: loginId,
       },

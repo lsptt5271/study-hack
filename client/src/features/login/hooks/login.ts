@@ -1,8 +1,11 @@
-import { Auth } from '@/@types';
-import axios from '@/libs/axios';
 import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import { useCallback, useState } from 'react';
+
+import { Auth } from '@/@types';
+import { PagePath } from '@/commons/constant';
+import axios from '@/libs/axios';
+import setAccessToken from '@/utils/set-access-token';
+import { destroyCookie } from 'nookies';
 
 export type LoginVariables = {
   loginId: string;
@@ -20,21 +23,26 @@ export const useLogin = () => {
     try {
       const data = await axios.post<never, Auth>('/login', loginVariables);
 
-      setCookie(null, 'accessToken', data.token, {
-        expires: new Date(data.exp * 1000),
-      });
+      setAccessToken(data);
 
-      router.push('/');
+      router.push(PagePath.Index);
     } catch (e) {
       console.log(e);
 
-      router.push('/login?status=error');
+      router.push(PagePath.Login.concat('?status=error'));
     }
-  }, [loginVariables]);
+  }, [loginVariables, router]);
+
+  const executeLogout = useCallback(() => {
+    destroyCookie(null, 'accessToken');
+
+    router.push(PagePath.Login.concat('?status=logout'));
+  }, [router]);
 
   return {
     loginVariables,
     setLoginVariables,
     executeLogin,
+    executeLogout,
   };
 };
