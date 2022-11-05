@@ -3,5 +3,5 @@
     "server_port": 3001,
     "log_dir": "/usr/local/app/server/logs",
     "jwt_secret_key": "secret_key",
-    "jwt_max_age": 604800
+    "jwt_max_age": 10
 }

@@ -1,3 +1,4 @@
 import config from 'next/config';
 
-export const ApiDestination = config().publicRuntimeConfig.apiDestination as string;
+export const ApiBasePath = config().publicRuntimeConfig.ApiDestination as string;
+export const ApiDestination = config().publicRuntimeConfig.ApiDestination as string;

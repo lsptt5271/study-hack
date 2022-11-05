@@ -1,15 +1,15 @@
-const basePath = '/study_hack';
-const apiDomain = 'localhost:3001';
-const apiBasePath = '/study_hack_api';
+const BasePath = '/study_hack';
+const ApiDomain = 'localhost:3001';
+const ApiBasePath = '/study_hack_api';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: basePath,
+  basePath: BasePath,
   reactStrictMode: false,
   publicRuntimeConfig: {
-    basePath,
-    apiBasePath,
-    apiDestination: `http://${apiDomain}${apiBasePath}`,
+    BasePath,
+    ApiBasePath,
+    ApiDestination: `http://${ApiDomain}${ApiBasePath}`,
   },
 };
 

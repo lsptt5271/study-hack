@@ -6,15 +6,17 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
-let _auth: Auth;
+let _auth: Auth | null;
 
-const useAuth = () => {
+export const useAuth = () => {
   return _auth;
 };
 
 export const AuthProvider = ({ auth, children }: AuthProviderProps) => {
   if (auth) {
     _auth = auth;
+  } else {
+    _auth = null;
   }
 
   return <>{children}</>;

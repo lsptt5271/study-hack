@@ -2,18 +2,16 @@ import { GetServerSideProps } from 'next';
 
 import getAuth from '@/utils/get-auth';
 import { PageProps } from '@/pages/_app';
-import { PrimaryButton } from '@/components/elements/PrimaryButton';
+import { PageHeader } from '@/components/layouts/PageHeader';
+import { PageMain } from '@/components/layouts/PageMain';
 
 type IndexPageProps = IndexServerSideProps;
 
 const IndexPage = ({ auth }: IndexPageProps) => {
   return (
     <>
-      <header>
-        <PrimaryButton>ログイン</PrimaryButton>
-        <PrimaryButton>新規登録</PrimaryButton>
-      </header>
-      <main></main>
+      <PageHeader />
+      <PageMain>メイン</PageMain>
     </>
   );
 };

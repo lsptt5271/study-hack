@@ -9,8 +9,8 @@ import userProvider from '@/providers/user';
 passport.use(
   new LocalStrategy(
     {
-      usernameField: 'username',
-      passwordField: 'password',
+      usernameField: 'loginId',
+      passwordField: 'loginPassword',
       session: false,
     },
     async (username, password, done) => {

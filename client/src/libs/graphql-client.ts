@@ -1,5 +1,6 @@
-import { ApiDestination } from '@/commons/constant';
 import { GraphQLClient } from 'graphql-request';
+
+import { ApiDestination } from '@/commons/constant';
 
 const graphqlClient = new GraphQLClient(ApiDestination.concat('/graphql'));
 

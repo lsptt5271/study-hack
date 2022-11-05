@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
+import { useForm } from 'react-hook-form';
+
 import { PrimaryButton } from '@/components/elements/PrimaryButton';
 import { Textbox } from '@/components/elements/Textbox';
 import { getGraphqlClient } from '@/libs/graphql-client';
 import { useRegisterUserMutation } from '@/repositories/graphql';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 
 type SignupFormState = {
   name: string;
@@ -14,11 +16,10 @@ type SignupFormState = {
 type SignupFormProps = {};
 
 export const SignupForm = ({}: SignupFormProps) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    reset,
-    getValues,
     formState: { errors },
   } = useForm<SignupFormState>({
     mode: 'onChange',
@@ -27,6 +28,12 @@ export const SignupForm = ({}: SignupFormProps) => {
   const onSubmit = handleSubmit((data) => {
     mutation.mutateAsync({
       input: data,
+    }).then((data) => {
+      setCookie(null, 'accessToken', data.createUser.token, {
+        expires: new Date(data.createUser.exp * 1000),
+      });
+
+      router.push('/');
     });
   });
 

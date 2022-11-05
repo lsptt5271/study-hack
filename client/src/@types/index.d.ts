@@ -1,11 +1,10 @@
 export type User = {
   name: string;
-  login_id: string;
+  loginId: string;
 };
 
 export type AuthResponse = {
   user: User;
-  iat: number;
   exp: number;
 };
 

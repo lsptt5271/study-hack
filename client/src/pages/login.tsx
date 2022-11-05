@@ -2,26 +2,26 @@ import { GetServerSideProps } from 'next';
 
 import getAuth from '@/utils/get-auth';
 import { PageProps } from '@/pages/_app';
-import { SignupForm } from '@/features/signup/components/SignupForm';
+import { LoginForm } from '@/features/login/components/LoginForm';
 import { PageMain } from '@/components/layouts/PageMain';
 
-const SignupPage = () => {
+const LoginPage = () => {
   return (
     <>
       <PageMain>
         <section className={'flexible-center h-full'}>
-          <SignupForm />
+          <LoginForm />
         </section>
       </PageMain>
     </>
   );
 };
 
-export default SignupPage;
+export default LoginPage;
 
-type SignupServerSideProps = PageProps;
+type LoginServerSideProps = PageProps;
 
-export const getServerSideProps: GetServerSideProps<SignupServerSideProps> = async (context) => {
+export const getServerSideProps: GetServerSideProps<LoginServerSideProps> = async (context) => {
   const { props, redirect } = await getAuth(context, false);
 
   return {
