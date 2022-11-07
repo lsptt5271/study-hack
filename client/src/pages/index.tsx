@@ -4,6 +4,7 @@ import getAuth from '@/utils/get-auth';
 import { PageProps } from '@/pages/_app';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { PageMain } from '@/components/layouts/PageMain';
+import { StudyPanel } from '@/features/study/components/StudyPanel';
 
 type IndexPageProps = IndexServerSideProps;
 
@@ -11,7 +12,7 @@ const IndexPage = ({ auth }: IndexPageProps) => {
   return (
     <>
       <PageHeader />
-      <PageMain>メイン</PageMain>
+      <PageMain>{auth ? <StudyPanel /> : <article>トップページ的なもの</article>}</PageMain>
     </>
   );
 };
