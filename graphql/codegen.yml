@@ -9,6 +9,7 @@ generates:
     config:
       mappers:
         Study: ../model#StudyModel
+        Category: ../model#CategoryModel
       contextType: ../context#Context
   ../client/src/repositories/graphql.ts:
     plugins:

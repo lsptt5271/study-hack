@@ -1,3 +1,9 @@
+mutation createCategory($input: CreateCategoryInput!) {
+  createCategory(input: $input) {
+    id
+  }
+}
+
 mutation registerUser($input: CreateUserInput!) {
   createUser(input: $input) {
     user {

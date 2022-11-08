@@ -3,6 +3,11 @@ type Study {
   name: String!
 }
 
+type Category {
+  id: Int!
+  name: String!
+}
+
 type User {
   name: String!
   loginId: String!
@@ -14,6 +19,10 @@ type Auth {
   token: String!
 }
 
+input CreateCategoryInput {
+  name: String!
+}
+
 input CreateUserInput {
   name: String!
   loginId: String!
@@ -22,8 +31,10 @@ input CreateUserInput {
 
 type Query {
   studies: [Study!]!
+  categories: [Category!]!
 }
 
 type Mutation {
+  createCategory(input: CreateCategoryInput!): Category!
   createUser(input: CreateUserInput!): Auth!
 }

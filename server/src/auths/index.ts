@@ -21,6 +21,7 @@ passport.use(
         return done(null, false);
       } else {
         return done(null, {
+          id: user.id,
           name: user.name,
           loginId: user.login_id,
         });

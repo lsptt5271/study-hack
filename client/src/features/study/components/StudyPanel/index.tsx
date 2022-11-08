@@ -1,4 +1,4 @@
-import { CategoryList } from '../CategoryList';
+import { CategoryListWrapper } from '../CategoryListWrapper';
 import { CategoryModal } from '../CategoryModal';
 
 export const StudyPanel = () => {
@@ -6,7 +6,7 @@ export const StudyPanel = () => {
     <>
       <article className={'flexible h-full p-2'}>
         <section className={'h-full w-[50%]'}>
-          <CategoryList />
+          <CategoryListWrapper />
         </section>
         <section className={'h-full flex-1'}></section>
       </article>

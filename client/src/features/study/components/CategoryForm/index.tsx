@@ -1,7 +1,11 @@
 import { FormField } from '@/components/elements/FormField';
 import { Textbox } from '@/components/elements/Textbox';
+import { getGraphqlClient } from '@/libs/graphql-client';
+import { useAuth } from '@/providers/auth';
+import { useCreateCategoryMutation, useGetCategoriesQuery } from '@/repositories/graphql';
 import { forwardRef, useImperativeHandle } from 'react';
 import { useForm } from 'react-hook-form';
+import { useCategoryModal } from '../CategoryModal/hook';
 
 export type CategoryFormHandles = {
   submit(): void;
@@ -14,6 +18,11 @@ type CategoryFormState = {
 type CategoryFormProps = {};
 
 export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
+  const auth = useAuth();
+  const { hideCategoryModal } = useCategoryModal();
+  const mutation = useCreateCategoryMutation(getGraphqlClient(auth));
+  const query = useGetCategoriesQuery(getGraphqlClient(auth));
+
   const {
     register,
     handleSubmit,
@@ -24,7 +33,16 @@ export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
 
   useImperativeHandle(ref, () => ({
     submit: handleSubmit((data) => {
-      console.log(data);
+      if (!auth) return;
+
+      mutation
+        .mutateAsync({
+          input: {
+            name: data.name,
+          },
+        })
+        .then(() => query.refetch())
+        .then(() => hideCategoryModal());
     }),
   }));
 

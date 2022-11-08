@@ -1,6 +1,6 @@
 import { Modal, ModalFooter, ModalMain } from '@/components/elements/Modal';
 import { PrimaryButton } from '@/components/elements/PrimaryButton';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { CategoryForm, CategoryFormHandles } from '../CategoryForm';
 import { useCategoryModal } from './hook';
 
@@ -15,9 +15,13 @@ export const CategoryModal = () => {
     </ModalMain>
   );
 
+  const onClickOkButton = useCallback(() => {
+    categoryFormRef.current?.submit();
+  }, []);
+
   const footer = (
     <ModalFooter>
-      <PrimaryButton className={'w-[120px]'} onClick={categoryFormRef.current?.submit}>
+      <PrimaryButton className={'w-[120px]'} onClick={onClickOkButton}>
         登録
       </PrimaryButton>
     </ModalFooter>

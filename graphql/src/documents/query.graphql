@@ -4,3 +4,10 @@ query getStudies {
     name
   }
 }
+
+query getCategories {
+  categories {
+    id
+    name
+  }
+}

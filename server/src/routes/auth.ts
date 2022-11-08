@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import passport from '@/auths/index';
 import { sign } from '@/auths/jwt';
-import { User } from '@/@types';
+import { JwtPayload, User } from '@/@types';
 import { isExistUser } from '@/services/user';
 
 const router = Router();
@@ -18,7 +18,7 @@ router.post(
 );
 
 router.post('/auth', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-  const auth = req.user;
+  const auth = req.user as JwtPayload;
   res.json(auth);
 });
 

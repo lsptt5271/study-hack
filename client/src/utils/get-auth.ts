@@ -16,8 +16,6 @@ const getAuth = async (context: GetServerSidePropsContext, redirectOnFail: boole
       },
     });
 
-    console.log(context);
-
     return {
       redirect:
         context.resolvedUrl === PagePath.Index
