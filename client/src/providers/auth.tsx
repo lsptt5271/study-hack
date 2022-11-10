@@ -1,12 +1,13 @@
 import { Auth } from '@/@types';
-import { ReactNode } from 'react';
+import { atom, useAtom } from 'jotai';
+import { ReactNode, useEffect } from 'react';
 
 type AuthProviderProps = {
-  auth?: Auth | null;
+  auth: Auth | null;
   children: ReactNode;
 };
 
-let _auth: Auth | null;
+let _auth: Auth | null = null;
 
 export const useAuth = () => {
   return _auth;

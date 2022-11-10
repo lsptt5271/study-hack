@@ -1,11 +1,13 @@
+import { forwardRef, useImperativeHandle } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { FormField } from '@/components/elements/FormField';
 import { Textbox } from '@/components/elements/Textbox';
 import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
-import { useCreateCategoryMutation, useGetCategoriesQuery } from '@/repositories/graphql';
-import { forwardRef, useImperativeHandle } from 'react';
-import { useForm } from 'react-hook-form';
-import { useCategoryModal } from '../CategoryModal/hook';
+import { useCreateCategoryMutation } from '@/repositories/graphql';
+import { useCategoryModal } from '@/features/category/components/CategoryModal/hook';
+import { useGetCategories } from '@/features/category/hooks/query';
 
 export type CategoryFormHandles = {
   submit(): void;
@@ -21,7 +23,7 @@ export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
   const auth = useAuth();
   const { hideCategoryModal } = useCategoryModal();
   const mutation = useCreateCategoryMutation(getGraphqlClient(auth));
-  const query = useGetCategoriesQuery(getGraphqlClient(auth));
+  const { getCategoriesQuery } = useGetCategories();
 
   const {
     register,
@@ -41,7 +43,7 @@ export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
             name: data.name,
           },
         })
-        .then(() => query.refetch())
+        .then(() => getCategoriesQuery.refetch())
         .then(() => hideCategoryModal());
     }),
   }));

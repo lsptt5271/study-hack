@@ -15,6 +15,7 @@ module.exports = {
       },
       backgroundColor: {
         base: 'var(--color-back)',
+        mask: 'var(--color-mask)'
       },
       textColor: {
         base: 'var(--color-fore)',
@@ -25,7 +26,21 @@ module.exports = {
       },
       borderColor: {
         base: 'var(--color-border)',
-        form: '#ddd'
+        form: '#ddd',
+        loading: 'rgba(0,0,0,0.3)'
+      },
+      animation: {
+        loading: 'loading 1.2s linear infinite',
+      },
+      keyframes: {
+        loading: {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            transform: 'rotate(360deg)'
+          },
+        },
       },
       variables: {
         DEFAULT: {
@@ -35,6 +50,7 @@ module.exports = {
             border: '#9d9d9d',
             back: '#11233d',
             fore: '#fff',
+            mask: 'rgba(255,255,255,0.1)',
           },
           size: {
             'header-height': '48px',

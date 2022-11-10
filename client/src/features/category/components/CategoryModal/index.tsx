@@ -1,7 +1,8 @@
+import { useCallback, useRef } from 'react';
+
 import { Modal, ModalFooter, ModalMain } from '@/components/elements/Modal';
 import { PrimaryButton } from '@/components/elements/PrimaryButton';
-import { useCallback, useRef } from 'react';
-import { CategoryForm, CategoryFormHandles } from '../CategoryForm';
+import { CategoryForm, CategoryFormHandles } from '@/features/category/components/CategoryForm';
 import { useCategoryModal } from './hook';
 
 export const CategoryModal = () => {

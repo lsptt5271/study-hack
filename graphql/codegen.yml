@@ -7,6 +7,8 @@ generates:
       - typescript
       - typescript-resolvers
     config:
+      scalars:
+        Upload: graphql-upload#Upload
       mappers:
         Study: ../model#StudyModel
         Category: ../model#CategoryModel
@@ -17,6 +19,8 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
+      scalars:
+        Upload: File
       fetcher: graphql-request
       isReactHook: true
       exposeQueryKeys: true

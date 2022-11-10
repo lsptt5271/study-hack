@@ -5,9 +5,14 @@ query getStudies {
   }
 }
 
-query getCategories {
-  categories {
+query getCategories($userId: Int) {
+  categories(userId: $userId) {
     id
     name
+    menus {
+      id
+      name
+      image
+    }
   }
 }

@@ -1,5 +1,5 @@
-import { CategoryListWrapper } from '../CategoryListWrapper';
-import { CategoryModal } from '../CategoryModal';
+import { CategoryListWrapper } from '@/features/category/components/CategoryListWrapper';
+import { CategoryModal } from '@/features/category/components/CategoryModal';
 
 export const StudyPanel = () => {
   return (

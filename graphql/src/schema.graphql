@@ -1,3 +1,5 @@
+scalar Upload
+
 type Study {
   id: Int!
   name: String!
@@ -6,6 +8,13 @@ type Study {
 type Category {
   id: Int!
   name: String!
+  menus: [Menu!]!
+}
+
+type Menu {
+  id: Int!
+  name: String!
+  image: String!
 }
 
 type User {
@@ -23,6 +32,20 @@ input CreateCategoryInput {
   name: String!
 }
 
+input DeleteCategoryInput {
+  categoryId: Int!
+}
+
+input CreateMenuInput {
+  name: String!
+  image: Upload
+  categoryId: Int!
+}
+
+input DeleteMenuInput {
+  menuId: Int!
+}
+
 input CreateUserInput {
   name: String!
   loginId: String!
@@ -31,10 +54,13 @@ input CreateUserInput {
 
 type Query {
   studies: [Study!]!
-  categories: [Category!]!
+  categories(userId: Int): [Category!]!
 }
 
 type Mutation {
-  createCategory(input: CreateCategoryInput!): Category!
+  createCategory(input: CreateCategoryInput!): Boolean!
+  deleteCategory(input: DeleteCategoryInput!): Boolean!
+  createMenu(input: CreateMenuInput!): Boolean!
+  deleteMenu(input: DeleteMenuInput!): Boolean!
   createUser(input: CreateUserInput!): Auth!
 }

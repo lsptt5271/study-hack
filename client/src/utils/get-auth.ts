@@ -18,12 +18,12 @@ const getAuth = async (context: GetServerSidePropsContext, redirectOnFail: boole
 
     return {
       redirect:
-        context.resolvedUrl === PagePath.Index
-          ? undefined
-          : {
+        context.resolvedUrl === PagePath.Login
+          ? {
               permanent: false,
               destination: PagePath.Index,
-            },
+            }
+          : undefined,
       props: {
         auth: {
           ...auth,

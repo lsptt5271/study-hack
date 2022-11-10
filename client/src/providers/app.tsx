@@ -7,7 +7,7 @@ import { queryClient } from '@/libs/react-query';
 import { AuthProvider } from '@/providers/auth';
 
 type AppProviderProps = {
-  auth?: Auth | null;
+  auth: Auth | null;
   children: ReactNode;
 };
 

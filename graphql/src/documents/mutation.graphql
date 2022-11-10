@@ -1,7 +1,13 @@
 mutation createCategory($input: CreateCategoryInput!) {
-  createCategory(input: $input) {
-    id
-  }
+  createCategory(input: $input)
+}
+
+mutation deleteCategory($input: DeleteCategoryInput!) {
+  deleteCategory(input: $input)
+}
+
+mutation createMenu($input: CreateMenuInput!) {
+  createMenu(input: $input)
 }
 
 mutation registerUser($input: CreateUserInput!) {

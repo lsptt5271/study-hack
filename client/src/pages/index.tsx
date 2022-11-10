@@ -1,10 +1,14 @@
 import { GetServerSideProps } from 'next';
+import dynamic from 'next/dynamic';
 
 import getAuth from '@/utils/get-auth';
 import { PageProps } from '@/pages/_app';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { PageMain } from '@/components/layouts/PageMain';
-import { StudyPanel } from '@/features/study/components/StudyPanel';
+
+const StudyPanel = dynamic(() => import('@/features/study/components/StudyPanel').then((module) => module.StudyPanel), {
+  ssr: false,
+});
 
 type IndexPageProps = IndexServerSideProps;
 

@@ -8,3 +8,9 @@ export type CategoryModel = {
   name: string;
   userId: number;
 };
+
+export type MenuModel = {
+  id: number;
+  name: string;
+  categoryId: number;
+};

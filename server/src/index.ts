@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 import passport from '@/auths';
 import config from '@/configs';
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 
 app.use(contextPath, router);
 
+app.use(graphqlUploadExpress());
 app.use(`${contextPath}graphql`, graphql);
 
 app.use(errorHandler.notfound);

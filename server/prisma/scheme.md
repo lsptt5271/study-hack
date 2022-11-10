@@ -6,24 +6,26 @@ erDiagram
     String name  
     String login_id  
     String login_password  
-    DateTime createdAt  
-    DateTime updatedAt  
+    DateTime created_at  
+    DateTime updated_at  
     }
   
 
   Category {
     Int id PK 
     String name  
-    DateTime createdAt  
-    DateTime updatedAt  
+    DateTime created_at  
+    DateTime updated_at  
     }
   
 
   Menu {
     Int id PK 
     String name  
-    DateTime createdAt  
-    DateTime updatedAt  
+    String image  "nullable"
+    String image_content_type  "nullable"
+    DateTime created_at  
+    DateTime updated_at  
     }
   
 
@@ -32,8 +34,8 @@ erDiagram
     String name  
     DateTime start_at  
     DateTime end_at  
-    DateTime createdAt  
-    DateTime updatedAt  
+    DateTime created_at  
+    DateTime updated_at  
     }
   
     Category o{--|| User : "user"

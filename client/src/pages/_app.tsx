@@ -3,11 +3,10 @@ import { AppProps } from 'next/app';
 import '@/styles/globals.css';
 
 import { Auth } from '@/@types';
-import { AuthProvider } from '@/providers/auth';
 import { AppProvider } from '@/providers/app';
 
 export type PageProps = {
-  auth?: Auth | null;
+  auth: Auth | null;
 };
 
 const App = ({ Component, pageProps }: AppProps) => {

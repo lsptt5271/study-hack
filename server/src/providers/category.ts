@@ -1,13 +1,28 @@
-import { User } from '@/@types';
-import { CreateCategoryInput } from '@/graphqls/resolvers/type';
+import { CreateCategoryInput, DeleteCategoryInput } from '@/graphqls/resolvers/type';
 import client from '@/providers/client';
 
 const categoryProvider = () => {
-  const create = async (data: CreateCategoryInput, user: User) => {
+  const create = async (data: CreateCategoryInput, userId: number) => {
     return await client.category.create({
       data: {
         name: data.name,
-        user_id: user.id,
+        user_id: userId,
+      },
+    });
+  };
+
+  const remove = async (data: DeleteCategoryInput) => {
+    return await client.category.delete({
+      where: {
+        id: data.categoryId,
+      },
+    });
+  };
+
+  const findOneById = async (id: number) => {
+    return await client.category.findUnique({
+      where: {
+        id: id,
       },
     });
   };
@@ -20,7 +35,7 @@ const categoryProvider = () => {
     });
   };
 
-  return { create, findByUserId };
+  return { create, remove, findOneById, findByUserId };
 };
 
 export default categoryProvider;
