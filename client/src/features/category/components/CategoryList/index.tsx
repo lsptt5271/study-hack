@@ -24,6 +24,13 @@ export const CategoryList = () => {
     });
   }, []);
 
+  const onClickRow = useCallback(
+    (categtoryId: number) => {
+      setSelectedCategoryId(categtoryId);
+    },
+    [setSelectedCategoryId]
+  );
+
   useEffect(() => {
     if (categories.length) {
       setSelectedCategoryId(categories[0].id);
@@ -46,7 +53,7 @@ export const CategoryList = () => {
       </List>
       <List>
         {categories.map((category) => (
-          <ListRow key={category.id} selected={selectedCategoryId === category.id}>
+          <ListRow className={'cursor-pointer'} key={category.id} selected={selectedCategoryId === category.id} onClick={() => onClickRow(category.id)}>
             <ListColumn className={'flex-1'}>{category.name}</ListColumn>
             <ListColumn className="w-[40px]" position="center">
               <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(category.id)}>

@@ -12,6 +12,7 @@ generates:
       mappers:
         Study: ../model#StudyModel
         Category: ../model#CategoryModel
+        Menu: ../model#MenuModel
       contextType: ../context#Context
   ../client/src/repositories/graphql.ts:
     plugins:

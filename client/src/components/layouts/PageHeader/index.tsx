@@ -5,6 +5,7 @@ import { PrimaryButton } from '@/components/elements/PrimaryButton';
 import { useAuth } from '@/providers/auth';
 import { PagePath } from '@/commons/constant';
 import { useLogin } from '@/features/login/hooks/login';
+import { MaterialIcon } from '@/components/elements/MaterialIcon';
 
 type PageHeaderProps = {
   plain?: boolean;
@@ -23,6 +24,14 @@ export const PageHeader = ({ plain = false }: PageHeaderProps) => {
     router.push(PagePath.Signup);
   }, [router]);
 
+  const onClickConfigButton = useCallback(() => {
+    router.push(PagePath.Config);
+  }, [router]);
+
+  const onClickHomeButton = useCallback(() => {
+    router.push(PagePath.Index);
+  }, []);
+
   const onClickLogoutButton = useCallback(() => {
     executeLogout();
   }, []);
@@ -37,12 +46,24 @@ export const PageHeader = ({ plain = false }: PageHeaderProps) => {
           {auth ? (
             <>
               <div>
-                <span>{auth.user.name}</span>
+                <span className={'font-bold'}>{auth.user.name}</span>
                 <span className={'px-2'}>さん</span>
               </div>
-              <PrimaryButton className={'ml-1 w-[120px] font-bold'} onClick={onClickLogoutButton}>
-                ログアウト
-              </PrimaryButton>
+              <div className={'flexible-center'}>
+                {router.pathname !== PagePath.Config && (
+                  <MaterialIcon onClick={onClickConfigButton} className={'mx-2 cursor-pointer text-3xl'}>
+                    settings
+                  </MaterialIcon>
+                )}
+                {router.pathname !== PagePath.Index && (
+                  <MaterialIcon onClick={onClickHomeButton} className={'mx-2 cursor-pointer text-3xl'}>
+                    home
+                  </MaterialIcon>
+                )}
+                <MaterialIcon onClick={onClickLogoutButton} className={'mx-2 cursor-pointer text-3xl'}>
+                  logout
+                </MaterialIcon>
+              </div>
             </>
           ) : (
             <>

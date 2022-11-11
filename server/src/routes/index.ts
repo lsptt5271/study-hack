@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import logger from '@/commons/logger';
 import authRouter from '@/routes/auth';
+import imageRouter from '@/routes/image';
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.use((req, res, next) => {
 });
 
 router.use(authRouter);
+router.use(imageRouter);
 
 export default router;

@@ -29,7 +29,7 @@ const menuProvider = () => {
     });
   };
 
-  const findOneById = (id: number) => {
+  const findOneByIdWithCategory = (id: number) => {
     return client.menu.findUnique({
       where: {
         id,
@@ -40,7 +40,15 @@ const menuProvider = () => {
     });
   };
 
-  return { create, remove, findOneById, findByCategoryId };
+  const findOneById = (id: number) => {
+    return client.menu.findUnique({
+      where: {
+        id,
+      },
+    });
+  };
+
+  return { create, remove, findOneById, findOneByIdWithCategory, findByCategoryId };
 };
 
 export default menuProvider;

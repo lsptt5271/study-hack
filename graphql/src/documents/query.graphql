@@ -12,7 +12,6 @@ query getCategories($userId: Int) {
     menus {
       id
       name
-      image
     }
   }
 }

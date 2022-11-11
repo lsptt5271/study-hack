@@ -9,6 +9,7 @@ import { useAuth } from '@/providers/auth';
 import { useDeleteCategoryMutation } from '@/repositories/graphql';
 import { useGetCategories } from '@/features/category/hooks/query';
 import { MaterialIcon } from '@/components/elements/MaterialIcon';
+import { MenuImage } from '@/components/elements/MenuImage';
 
 export const MenuList = () => {
   const auth = useAuth();
@@ -38,7 +39,10 @@ export const MenuList = () => {
       </List>
       <List>
         {menus.map((menu) => (
-          <ListRow key={menu.id}>
+          <ListRow key={menu.id} className="h-[100px]">
+            <ListColumn>
+              <MenuImage menuId={menu.id} />
+            </ListColumn>
             <ListColumn className={'flex-1'}>{menu.name}</ListColumn>
             <ListColumn className="w-[40px]" position="center">
               <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(menu.id)}>

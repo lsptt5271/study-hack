@@ -1,12 +1,15 @@
-import { createWriteStream } from 'fs';
-import { randomUUID } from 'crypto';
-
-import configs from '@/configs';
 import exception from '@/graphqls/exception';
 import { MutationResolvers } from '../type';
+import { createMenuForUser } from '@/services/menu';
+import logger from '@/commons/logger';
 
 export const createMenuMutation: MutationResolvers['createMenu'] = (source, args, context) => {
   if (!context.user) throw exception('Unauthorized!');
 
-  return true;
+  return createMenuForUser(args.input, context.user)
+    .then(() => true)
+    .catch((e) => {
+      logger.system.error(e);
+      return false;
+    });
 };

@@ -4,6 +4,7 @@ node_modules
 client/src/repositories/graphql.ts
 client/.next
 
+server/images
 server/logs
 server/tmp
 server/dist

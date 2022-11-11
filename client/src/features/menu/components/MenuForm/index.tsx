@@ -40,8 +40,6 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
     submit: handleSubmit((data) => {
       if (!auth) return;
 
-      console.log(data);
-
       mutation
         .mutateAsync({
           input: {

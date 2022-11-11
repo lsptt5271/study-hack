@@ -7,4 +7,5 @@ export const PagePath = {
   Index: '/',
   Login: '/login',
   Signup: '/signup',
+  Config: '/config',
 };
