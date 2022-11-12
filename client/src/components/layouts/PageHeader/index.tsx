@@ -51,16 +51,16 @@ export const PageHeader = ({ plain = false }: PageHeaderProps) => {
               </div>
               <div className={'flexible-center'}>
                 {router.pathname !== PagePath.Config && (
-                  <MaterialIcon onClick={onClickConfigButton} className={'mx-2 cursor-pointer text-3xl'}>
+                  <MaterialIcon onClick={onClickConfigButton} className={'mx-2 text-3xl'}>
                     settings
                   </MaterialIcon>
                 )}
                 {router.pathname !== PagePath.Index && (
-                  <MaterialIcon onClick={onClickHomeButton} className={'mx-2 cursor-pointer text-3xl'}>
+                  <MaterialIcon onClick={onClickHomeButton} className={'mx-2 text-3xl'}>
                     home
                   </MaterialIcon>
                 )}
-                <MaterialIcon onClick={onClickLogoutButton} className={'mx-2 cursor-pointer text-3xl'}>
+                <MaterialIcon onClick={onClickLogoutButton} className={'mx-2 text-3xl'}>
                   logout
                 </MaterialIcon>
               </div>

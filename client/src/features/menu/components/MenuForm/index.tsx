@@ -54,7 +54,8 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
         .then(() => hideMenuModal());
     }),
   }));
-
+  const aaa = register('category');
+  console.log(aaa);
   return (
     <form>
       <FormField>
@@ -64,7 +65,7 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
       </FormField>
       <FormField>
         <div>カテゴリー</div>
-        <SelectBox className={'w-full'} {...register('category')}>
+        <SelectBox className={'w-full'} {...aaa}>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}

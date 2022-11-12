@@ -5,5 +5,5 @@ type PageMainProps = {
 };
 
 export const PageMain = ({ children }: PageMainProps) => {
-  return <main className={'flex-1'}>{children}</main>;
+  return <main className={'h-[calc(100%_-_var(--size-header-height))]'}>{children}</main>;
 };

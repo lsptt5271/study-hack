@@ -10,6 +10,10 @@ mutation createMenu($input: CreateMenuInput!) {
   createMenu(input: $input)
 }
 
+mutation deleteMenu($input: DeleteMenuInput!) {
+  deleteMenu(input: $input)
+}
+
 mutation registerUser($input: CreateUserInput!) {
   createUser(input: $input) {
     user {

@@ -27,7 +27,7 @@
   }
 
   #__next {
-    @apply h-full flex flex-col;
+    @apply h-full;
   }
 }
 

@@ -32,23 +32,23 @@ export const CategoryList = () => {
             カテゴリー
           </ListColumn>
           <ListColumn className="w-[40px]" position="center">
-            <span className="material-icons cursor-pointer text-3xl" onClick={showCategoryModal}>
+            <MaterialIcon className="material-icons text-3xl" onClick={showCategoryModal}>
               add_circle
-            </span>
+            </MaterialIcon>
           </ListColumn>
         </ListRow>
       </List>
-      <List>
+      <List className={'flex-1'}>
         {categories.map((category) => (
           <ListRow key={category.id}>
             <ListColumn className={'flex-1'}>{category.name}</ListColumn>
             <ListColumn className="w-[40px]" position="center">
-              <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(category.id)}>
+              <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(category.id)}>
                 edit
               </MaterialIcon>
             </ListColumn>
             <ListColumn className="w-[40px]" position="center">
-              <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(category.id)}>
+              <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(category.id)}>
                 delete
               </MaterialIcon>
             </ListColumn>

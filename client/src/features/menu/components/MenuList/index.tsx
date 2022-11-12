@@ -6,7 +6,7 @@ import { ListRow } from '@/components/elements/ListRow';
 import { useMenuModal } from '@/features/menu/components/MenuModal/hook';
 import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
-import { useDeleteCategoryMutation } from '@/repositories/graphql';
+import { useDeleteCategoryMutation, useDeleteMenuMutation } from '@/repositories/graphql';
 import { MaterialIcon } from '@/components/elements/MaterialIcon';
 import { MenuImage } from '@/components/elements/MenuImage';
 import { useMenusStore } from '@/features/menu/hooks/store';
@@ -17,10 +17,10 @@ export const MenuList = () => {
   const { showMenuModal } = useMenuModal();
   const { menus } = useMenusStore();
   const getCategoriesQuery = useCustomGetCategoriesQuery();
-  const deleteCategoryMutation = useDeleteCategoryMutation(getGraphqlClient(auth));
+  const deleteMenuMutation = useDeleteMenuMutation(getGraphqlClient(auth));
 
-  const onClickDelete = useCallback((categoryId: number) => {
-    deleteCategoryMutation.mutateAsync({ input: { categoryId: categoryId } }).then(() => {
+  const onClickDelete = useCallback((menuId: number) => {
+    deleteMenuMutation.mutateAsync({ input: { menuId } }).then(() => {
       getCategoriesQuery.refetch();
     });
   }, []);
@@ -33,13 +33,13 @@ export const MenuList = () => {
             メニュー
           </ListColumn>
           <ListColumn className="w-[40px]" position="center">
-            <span className="material-icons cursor-pointer text-3xl" onClick={showMenuModal}>
+            <MaterialIcon className="material-icons text-3xl" onClick={showMenuModal}>
               add_circle
-            </span>
+            </MaterialIcon>
           </ListColumn>
         </ListRow>
       </List>
-      <List>
+      <List className={'flex-1'}>
         {menus.map((menu) => (
           <ListRow key={menu.id} className="h-[100px]">
             <ListColumn>
@@ -50,12 +50,12 @@ export const MenuList = () => {
               <div>カテゴリー：{menu.category.name}</div>
             </ListColumn>
             <ListColumn className="w-[40px]" position="center">
-              <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(menu.id)}>
+              <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(menu.id)}>
                 edit
               </MaterialIcon>
             </ListColumn>
             <ListColumn className="w-[40px]" position="center">
-              <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(menu.id)}>
+              <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(menu.id)}>
                 delete
               </MaterialIcon>
             </ListColumn>

@@ -4,7 +4,7 @@ import { createUserMutationResolver } from '@/graphqls/resolvers/user/mutation';
 import { createCategoryMutation, deleteCategoryMutation } from './category/mutation';
 import { categoriesQueryResolver } from './category/query';
 import categoryFieldResolvers from './category/field';
-import { createMenuMutation } from './menu/mutation';
+import { createMenuMutation, deleteMenuMutation } from './menu/mutation';
 
 const resolver: Resolvers = {
   Category: categoryFieldResolvers,
@@ -16,6 +16,7 @@ const resolver: Resolvers = {
     createCategory: createCategoryMutation,
     deleteCategory: deleteCategoryMutation,
     createMenu: createMenuMutation,
+    deleteMenu: deleteMenuMutation,
     createUser: createUserMutationResolver,
   },
 };
