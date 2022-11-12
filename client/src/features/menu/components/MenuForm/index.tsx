@@ -7,8 +7,9 @@ import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
 import { useCreateMenuMutation } from '@/repositories/graphql';
 import { useMenuModal } from '@/features/menu/components/MenuModal/hook';
-import { useGetCategories } from '@/features/category/hooks/query';
-import { useSelectedCategory } from '@/features/category/hooks/selected-category';
+import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
+import { SelectBox } from '@/components/elements/SelectBox';
+import { useCategoriesStore } from '@/features/category/hooks/store';
 
 export type MenuFormHandles = {
   submit(): void;
@@ -16,6 +17,7 @@ export type MenuFormHandles = {
 
 type MenuFormState = {
   name: string;
+  category: string;
   image: FileList;
 };
 
@@ -25,8 +27,8 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
   const auth = useAuth();
   const { hideMenuModal } = useMenuModal();
   const mutation = useCreateMenuMutation(getGraphqlClient(auth));
-  const { getCategoriesQuery } = useGetCategories();
-  const { selectedCategoryId } = useSelectedCategory();
+  const { categories } = useCategoriesStore();
+  const getCategoriesQuery = useCustomGetCategoriesQuery();
 
   const {
     register,
@@ -45,7 +47,7 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
           input: {
             name: data.name,
             image: data.image[0],
-            categoryId: selectedCategoryId,
+            categoryId: parseInt(data.category),
           },
         })
         .then(() => getCategoriesQuery.refetch())
@@ -59,6 +61,16 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
         <div>メニュー名</div>
         <Textbox className={'w-full'} {...register('name', { required: 'メニュー名を入力してください。' })} />
         {errors.name?.message && <div className={'text-red-600'}>{errors.name.message}</div>}
+      </FormField>
+      <FormField>
+        <div>カテゴリー</div>
+        <SelectBox className={'w-full'} {...register('category')}>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </SelectBox>
       </FormField>
       <FormField>
         <div>サムネイル画像</div>

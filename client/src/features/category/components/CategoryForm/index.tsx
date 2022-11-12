@@ -7,7 +7,7 @@ import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
 import { useCreateCategoryMutation } from '@/repositories/graphql';
 import { useCategoryModal } from '@/features/category/components/CategoryModal/hook';
-import { useGetCategories } from '@/features/category/hooks/query';
+import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
 
 export type CategoryFormHandles = {
   submit(): void;
@@ -23,7 +23,7 @@ export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
   const auth = useAuth();
   const { hideCategoryModal } = useCategoryModal();
   const mutation = useCreateCategoryMutation(getGraphqlClient(auth));
-  const { getCategoriesQuery } = useGetCategories();
+  const getCategoriesQuery = useCustomGetCategoriesQuery();
 
   const {
     register,

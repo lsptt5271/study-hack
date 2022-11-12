@@ -7,34 +7,21 @@ import { useCategoryModal } from '@/features/category/components/CategoryModal/h
 import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
 import { useDeleteCategoryMutation } from '@/repositories/graphql';
-import { useGetCategories } from '@/features/category/hooks/query';
-import { useSelectedCategory } from '@/features/category/hooks/selected-category';
+import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
 import { MaterialIcon } from '@/components/elements/MaterialIcon';
+import { useCategoriesStore } from '@/features/category/hooks/store';
 
 export const CategoryList = () => {
   const auth = useAuth();
   const { showCategoryModal } = useCategoryModal();
-  const { categories, getCategoriesQuery } = useGetCategories();
+  const { categories } = useCategoriesStore();
+  const getCategoriesQuery = useCustomGetCategoriesQuery();
   const deleteCategoryMutation = useDeleteCategoryMutation(getGraphqlClient(auth));
-  const { selectedCategoryId, setSelectedCategoryId } = useSelectedCategory();
 
   const onClickDelete = useCallback((categoryId: number) => {
     deleteCategoryMutation.mutateAsync({ input: { categoryId: categoryId } }).then(() => {
       getCategoriesQuery.refetch();
     });
-  }, []);
-
-  const onClickRow = useCallback(
-    (categtoryId: number) => {
-      setSelectedCategoryId(categtoryId);
-    },
-    [setSelectedCategoryId]
-  );
-
-  useEffect(() => {
-    if (categories.length) {
-      setSelectedCategoryId(categories[0].id);
-    }
   }, []);
 
   return (
@@ -53,7 +40,7 @@ export const CategoryList = () => {
       </List>
       <List>
         {categories.map((category) => (
-          <ListRow className={'cursor-pointer'} key={category.id} selected={selectedCategoryId === category.id} onClick={() => onClickRow(category.id)}>
+          <ListRow key={category.id}>
             <ListColumn className={'flex-1'}>{category.name}</ListColumn>
             <ListColumn className="w-[40px]" position="center">
               <MaterialIcon className={'cursor-pointer text-3xl'} onClick={() => onClickDelete(category.id)}>

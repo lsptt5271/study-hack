@@ -23,5 +23,5 @@ export const ListColumn = ({ children, position = 'left', className = '' }: List
     return classNames.join(' ');
   }, [position]);
 
-  return <div className={overrideTailwindClasses(`flexible ${dynamicClassName} ${className}`)}>{children}</div>;
+  return <div className={overrideTailwindClasses(`flex items-center ${dynamicClassName} ${className}`)}>{children}</div>;
 };
