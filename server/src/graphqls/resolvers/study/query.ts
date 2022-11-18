@@ -1,8 +1,9 @@
+import exception from '@/graphqls/exception';
 import { QueryResolvers } from '@/graphqls/resolvers/type';
-import studyProvider from '@/providers/study';
+import { getStudiesForUser } from '@/services/study';
 
-export const studiesQueryResolver: QueryResolvers['studies'] = async () => {
-  const { findAll } = studyProvider();
+export const studiesQueryResolver: QueryResolvers['studies'] = async (source, args, context) => {
+  if (!context.user) throw exception('Unauthorized!');
 
-  return await findAll();
+  return getStudiesForUser(args.input, context.user);
 };

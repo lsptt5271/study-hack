@@ -2,7 +2,7 @@ import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useModal } from '@/components/elements/Modal/hook';
 
-export type ModalProps = {
+type ModalProps = {
   width?: number;
   height?: number;
   title?: string;
@@ -14,7 +14,17 @@ export type ModalProps = {
   hide: () => void;
 };
 
-export const Modal = ({ title = '', width = 0, height = 0, maskClickable = false, movable = false, active = false, main, footer, hide }: ModalProps) => {
+export const Modal = ({
+  title = '',
+  width = 0,
+  height = 0,
+  maskClickable = false,
+  movable = false,
+  active = false,
+  main,
+  footer,
+  hide,
+}: ModalProps) => {
   const onClickMask = useCallback(() => {
     if (maskClickable) {
       hide();
@@ -65,8 +75,15 @@ export const Modal = ({ title = '', width = 0, height = 0, maskClickable = false
       {active && (
         <section className={'fixed left-0 top-0 z-[1000] h-[100vh] w-[100vw]'} ref={$container}>
           <div className={'absolute top-0 left-0 bottom-0 right-0'}>
-            <div onClick={onClickMask} className={'absolute top-0 left-0 bottom-0 right-0 z-[1] bg-[rgba(255,255,255,0.1)]'} />
-            <section style={style} className={`relative z-[2] inline-block overflow-hidden rounded-t bg-base ${contentDynamicStyle}`} ref={$modal}>
+            <div
+              onClick={onClickMask}
+              className={'absolute top-0 left-0 bottom-0 right-0 z-[1] bg-[rgba(255,255,255,0.1)]'}
+            />
+            <section
+              style={style}
+              className={`relative z-[2] inline-block overflow-hidden rounded-t bg-base ${contentDynamicStyle}`}
+              ref={$modal}
+            >
               <header className={`bg-primary py-1 px-2 ${headerDynamicStyle}`} onMouseDown={onMousedownHeader}>
                 <h3>{title}</h3>
               </header>

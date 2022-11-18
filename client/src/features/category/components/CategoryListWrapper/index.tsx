@@ -5,7 +5,7 @@ import { LoadingMask } from '@/components/elements/LoadingMask';
 
 export const CategoryListWrapper = () => {
   return (
-    <div className={'h-[50%] w-[50%] rounded bg-primary p-1'}>
+    <div className={'mb-2 flex h-[50%] flex-col rounded bg-primary p-1'}>
       <Suspense fallback={<LoadingMask />}>
         <CategoryList />
       </Suspense>

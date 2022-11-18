@@ -7,7 +7,7 @@ export const ConfigMenuListWrapper = () => {
   return (
     <div className={'flex h-full flex-col rounded bg-primary p-1'}>
       <Suspense fallback={<LoadingMask />}>
-        <MenuList />
+        <MenuList isConfig={true} />
       </Suspense>
     </div>
   );

@@ -48,7 +48,20 @@ const menuProvider = () => {
     });
   };
 
-  return { create, remove, findOneById, findOneByIdWithCategory, findByCategoryId };
+  const findByIdsInWithCategory = (ids: number[]) => {
+    return client.menu.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+      include: {
+        category: true,
+      },
+    });
+  };
+
+  return { create, remove, findOneById, findOneByIdWithCategory, findByCategoryId, findByIdsInWithCategory };
 };
 
 export default menuProvider;

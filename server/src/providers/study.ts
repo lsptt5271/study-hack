@@ -1,11 +1,26 @@
+import { GetStudiesInput } from '@/graphqls/resolvers/type';
 import client from '@/providers/client';
 
 const studyProvider = () => {
-  const findAll = async () => {
-    return await client.study.findMany();
+  const findByMenuIdsInAndStartAtAndEndAt = (input: GetStudiesInput) => {
+    return client.study.findMany({
+      where: {
+        AND: {
+          menu_id: {
+            in: input.menuIds,
+          },
+          start_at: {
+            lte: input.startAt,
+          },
+          end_at: {
+            gte: input.endAt,
+          },
+        },
+      },
+    });
   };
 
-  return { findAll };
+  return { findByMenuIdsInAndStartAtAndEndAt };
 };
 
 export default studyProvider;

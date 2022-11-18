@@ -2,7 +2,10 @@ scalar Upload
 
 type Study {
   id: Int!
-  name: String!
+  memo: String!
+  startAt: String!
+  endAt: String!
+  createdAt: String!
 }
 
 type Category {
@@ -51,8 +54,14 @@ input CreateUserInput {
   loginPassword: String!
 }
 
+input GetStudiesInput {
+  menuIds: [Int!]!
+  startAt: String!
+  endAt: String!
+}
+
 type Query {
-  studies: [Study!]!
+  studies(input: GetStudiesInput!): [Study!]!
   categories(userId: Int): [Category!]!
 }
 

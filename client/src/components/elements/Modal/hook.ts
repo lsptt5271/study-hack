@@ -1,6 +1,6 @@
 import { RefObject, useCallback, useRef, useState } from 'react';
 
-export type ModalConfig = {
+export type ModalState = {
   left: number;
   top: number;
   moving: boolean;
@@ -8,7 +8,7 @@ export type ModalConfig = {
 };
 
 export const useModal = ($container: RefObject<HTMLDivElement>, $modal: RefObject<HTMLDivElement>) => {
-  const [state, setState] = useState<ModalConfig>({
+  const [modalState, setModalState] = useState<ModalState>({
     left: 0,
     top: 0,
     moving: false,
@@ -30,27 +30,32 @@ export const useModal = ($container: RefObject<HTMLDivElement>, $modal: RefObjec
     if ($container.current && $modal.current) {
       moveConfig.current.maxLeft = $container.current.offsetWidth - $modal.current.offsetWidth;
       moveConfig.current.maxTop = $container.current.offsetHeight - $modal.current?.offsetHeight;
-      setState((state) => ({ ...state, left: moveConfig.current.maxLeft / 2, top: (state.top = moveConfig.current.maxTop / 2), visible: true }));
+      setModalState((state) => ({
+        ...state,
+        left: moveConfig.current.maxLeft / 2,
+        top: (state.top = moveConfig.current.maxTop / 2),
+        visible: true,
+      }));
     }
-  }, []);
+  }, [setModalState]);
 
   const onHideModal = useCallback(() => {
-    setState((state) => ({ ...state, visible: false }));
-  }, [setState]);
+    setModalState((state) => ({ ...state, visible: false }));
+  }, [setModalState]);
 
   const moveStartModal = useCallback(
     (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
       moveConfig.current.scrollX = e.pageX - e.clientX;
       moveConfig.current.scrollY = e.pageY - e.clientY;
-      moveConfig.current.left = e.pageX - state.left;
-      moveConfig.current.top = e.pageY - state.top;
+      moveConfig.current.left = e.pageX - modalState.left;
+      moveConfig.current.top = e.pageY - modalState.top;
 
       document.addEventListener('mousemove', move);
       document.addEventListener('mouseup', moveEnd);
 
-      setState((state) => ({ ...state, moving: true }));
+      setModalState((state) => ({ ...state, moving: true }));
     },
-    [setState, state.left, state.top]
+    [setModalState, modalState.left, modalState.top]
   );
 
   const move = useCallback(
@@ -76,9 +81,9 @@ export const useModal = ($container: RefObject<HTMLDivElement>, $modal: RefObjec
         currentTop = 0;
       }
 
-      setState((state) => ({ ...state, left: currentLeft, top: currentTop }));
+      setModalState((state) => ({ ...state, left: currentLeft, top: currentTop }));
     },
-    [setState]
+    [setModalState]
   );
 
   const moveEnd = useCallback(() => {
@@ -88,8 +93,8 @@ export const useModal = ($container: RefObject<HTMLDivElement>, $modal: RefObjec
     document.removeEventListener('mousemove', move);
     document.removeEventListener('mouseup', moveEnd);
 
-    setState((state) => ({ ...state, moving: false }));
-  }, [setState]);
+    setModalState((state) => ({ ...state, moving: false }));
+  }, [setModalState]);
 
-  return { modalConfig: state, onShowModal, onHideModal, moveStartModal };
+  return { modalConfig: modalState, onShowModal, onHideModal, moveStartModal };
 };

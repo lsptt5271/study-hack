@@ -1,11 +1,13 @@
-query getStudies {
-  studies {
+query getStudies($input: GetStudiesInput!) {
+  studies(input: $input) {
     id
-    name
+    memo
+    startAt
+    endAt
   }
 }
 
-query getCategories($userId: Int) {
+query getCategories($userId: Int!) {
   categories(userId: $userId) {
     id
     name

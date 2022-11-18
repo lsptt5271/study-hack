@@ -1,6 +1,10 @@
 export type StudyModel = {
   id: number;
-  name: string;
+  memo: string;
+  startAt: string;
+  endAt: string;
+  menuId: number;
+  createdAt: string;
 };
 
 export type CategoryModel = {

@@ -10,15 +10,15 @@ export const CategoryModal = () => {
 
   const categoryFormRef = useRef<CategoryFormHandles>(null);
 
+  const onClickOkButton = useCallback(() => {
+    categoryFormRef.current?.submit();
+  }, []);
+
   const main = (
     <ModalMain>
       <CategoryForm ref={categoryFormRef}></CategoryForm>
     </ModalMain>
   );
-
-  const onClickOkButton = useCallback(() => {
-    categoryFormRef.current?.submit();
-  }, []);
 
   const footer = (
     <ModalFooter>

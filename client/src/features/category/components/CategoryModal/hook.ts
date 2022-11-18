@@ -1,5 +1,4 @@
 import { atom, useAtom } from 'jotai';
-import { useCallback } from 'react';
 
 type CategoryModalState = {
   active: boolean;

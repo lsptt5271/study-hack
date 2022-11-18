@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import { List } from '@/components/elements/List';
 import { ListColumn } from '@/components/elements/ListColumn';
@@ -11,7 +11,11 @@ import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
 import { MaterialIcon } from '@/components/elements/MaterialIcon';
 import { useCategoriesStore } from '@/features/category/hooks/store';
 
-export const CategoryList = () => {
+type CategoryListProps = {
+  isConfig?: boolean;
+};
+
+export const CategoryList = ({ isConfig = false }: CategoryListProps) => {
   const auth = useAuth();
   const { showCategoryModal } = useCategoryModal();
   const { categories } = useCategoriesStore();
@@ -24,34 +28,44 @@ export const CategoryList = () => {
     });
   }, []);
 
+  const headerListColumnDynamicClassName = useMemo(() => {
+    return isConfig ? 'pl-[40px]' : '';
+  }, [isConfig]);
+
   return (
     <>
       <List>
         <ListRow>
-          <ListColumn className={'flex-1 pl-[40px]'} position="center">
+          <ListColumn className={`flex-1 ${headerListColumnDynamicClassName}`} position="center">
             カテゴリー
           </ListColumn>
-          <ListColumn className="w-[40px]" position="center">
-            <MaterialIcon className="material-icons text-3xl" onClick={showCategoryModal}>
-              add_circle
-            </MaterialIcon>
-          </ListColumn>
+          {isConfig && (
+            <ListColumn className="w-[40px]" position="center">
+              <MaterialIcon className="material-icons text-3xl" onClick={showCategoryModal}>
+                add_circle
+              </MaterialIcon>
+            </ListColumn>
+          )}
         </ListRow>
       </List>
       <List className={'flex-1'}>
         {categories.map((category) => (
           <ListRow key={category.id}>
             <ListColumn className={'flex-1'}>{category.name}</ListColumn>
-            <ListColumn className="w-[40px]" position="center">
-              <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(category.id)}>
-                edit
-              </MaterialIcon>
-            </ListColumn>
-            <ListColumn className="w-[40px]" position="center">
-              <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(category.id)}>
-                delete
-              </MaterialIcon>
-            </ListColumn>
+            {isConfig && (
+              <>
+                <ListColumn className="w-[40px]" position="center">
+                  <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(category.id)}>
+                    edit
+                  </MaterialIcon>
+                </ListColumn>
+                <ListColumn className="w-[40px]" position="center">
+                  <MaterialIcon className={'text-3xl'} onClick={() => onClickDelete(category.id)}>
+                    delete
+                  </MaterialIcon>
+                </ListColumn>
+              </>
+            )}
           </ListRow>
         ))}
       </List>

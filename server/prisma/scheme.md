@@ -31,7 +31,7 @@ erDiagram
 
   Study {
     Int id PK 
-    String name  
+    String memo  
     DateTime start_at  
     DateTime end_at  
     DateTime created_at  

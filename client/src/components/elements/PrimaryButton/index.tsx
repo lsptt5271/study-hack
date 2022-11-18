@@ -8,14 +8,7 @@ type PrimaryButtonProps = {
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const PrimaryButton = ({
-  size = 'normal',
-  className,
-  children,
-  onClick = () => {
-    return;
-  },
-}: PrimaryButtonProps) => {
+export const PrimaryButton = ({ size = 'normal', className, children, onClick }: PrimaryButtonProps) => {
   const dynamicClassName = useMemo(() => {
     switch (size) {
       case 'thin':
