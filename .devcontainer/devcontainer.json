@@ -5,6 +5,7 @@
     "workspaceFolder": "/usr/local/app",
     "extensions": [
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "prisma.prisma"
     ]
 }

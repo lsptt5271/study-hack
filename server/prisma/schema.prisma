@@ -7,7 +7,7 @@ generator client {
 
 generator erd {
   provider = "prisma-erd-generator"
-  output = "scheme.md"
+  output   = "scheme.md"
 }
 
 datasource db {
@@ -21,18 +21,18 @@ model User {
   login_id       String     @unique @db.VarChar(128)
   login_password String     @db.VarChar(512)
   categories     Category[] @relation("user_fk_category")
-  created_at      DateTime   @default(now())
-  updated_at      DateTime   @updatedAt
+  created_at     DateTime   @default(now())
+  updated_at     DateTime   @updatedAt
 }
 
 model Category {
-  id             Int      @id @default(autoincrement())
-  name           String   @db.VarChar(128)
-  user_id        Int
-  user           User     @relation(name: "user_fk_category", fields: [user_id], references: [id])
-  menus          Menu[]   @relation("category_fk_menu")
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(128)
+  user_id    Int
+  user       User     @relation(name: "user_fk_category", fields: [user_id], references: [id])
+  menus      Menu[]   @relation("category_fk_menu")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Menu {
@@ -48,12 +48,12 @@ model Menu {
 }
 
 model Study {
-  id             Int      @id @default(autoincrement())
-  memo           String   @db.VarChar(128)
-  start_at       DateTime
-  end_at         DateTime
-  menu_id        Int
-  menu           Menu     @relation(name: "menu_fk_study", fields: [menu_id], references: [id])
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  memo       String   @db.VarChar(128)
+  start_at   DateTime
+  end_at     DateTime
+  menu_id    Int
+  menu       Menu     @relation(name: "menu_fk_study", fields: [menu_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
