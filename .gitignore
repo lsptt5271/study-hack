@@ -9,3 +9,6 @@ server/logs
 server/tmp
 server/dist
 server/src/graphqls/resolvers/type.ts
+
+terraform/environments/.terraform
+terraform/environments/.terraform.lock.hcl
