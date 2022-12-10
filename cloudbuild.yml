@@ -1,0 +1,19 @@
+steps:
+  # Docker Build
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "/bin/bash"
+    args:
+      [
+        "cd",
+        "server",
+        "&&",
+        "docker",
+        "build",
+        "-t",
+        "asia-northeast1-docker.pkg.dev/study-hack/web/frontend",
+        ".",
+      ]
+
+  # Docker Push
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "asia-northeast1-docker.pkg.dev/study-hack/web/frontend"]
