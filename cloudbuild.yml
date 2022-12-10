@@ -5,7 +5,7 @@ steps:
       [
         "build",
         "-f",
-        "./server/Dockerfilea",
+        "./server/Dockerfile",
         "-t",
         "asia-northeast1-docker.pkg.dev/study-hack/web/frontend",
         ".",
