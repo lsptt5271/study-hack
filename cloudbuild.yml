@@ -4,9 +4,11 @@ steps:
     args:
       [
         "build",
+        "-f",
+        "./server",
         "-t",
         "asia-northeast1-docker.pkg.dev/study-hack/web/frontend",
-        "./server",
+        ".",
       ]
 
   # Docker Push
