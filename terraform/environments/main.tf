@@ -8,6 +8,7 @@ resource "google_project_service" "activate_gcp_services" {
   for_each = toset([
     "cloudbuild.googleapis.com",
     "containerregistry.googleapis.com",
+    "artifactregistry.googleapis.com",
     "run.googleapis.com",
     "cloudresourcemanager.googleapis.com"
   ])
