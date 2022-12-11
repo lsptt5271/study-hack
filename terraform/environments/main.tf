@@ -26,3 +26,30 @@ resource "google_cloudbuild_trigger" "cloudbuild" {
     }
   }
 }
+
+resource "google_artifact_registry_repository" "web" {
+  location      = "asia-northeast1"
+  repository_id = "web"
+  format        = "DOCKER"
+}
+
+resource "google_cloud_run_service" "default1" {
+  name     = "frontend"
+  location = "asia-northeast1"
+
+  template {
+    spec {
+      containers {
+        image = "asia-northeast1-docker.pkg.dev/study-hack/web/frontend"
+        ports {
+          container_port = 3001
+        }
+      }
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
