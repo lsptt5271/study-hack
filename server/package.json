@@ -12,7 +12,7 @@
     "dev": "wait-on src/schema.graphql && wait-on src/graphqls/resolvers/type.ts && webpack --watch",
     "build": "run-p build:*",
     "build:clean": "rimraf dist",
-    "build:bundle": "wait-on src/schema.graphql && wait-on src/graphqls/resolvers/type.ts && webpack --env production=true",
+    "build:bundle": "wait-on src/schema.graphql && wait-on src/graphqls/resolvers/type.ts && npx prisma generate && webpack --env production=true",
     "start": "node dist/app.js"
   },
   "dependencies": {
