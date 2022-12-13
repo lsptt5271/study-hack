@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   gcloud:
     container_name: gcloud
@@ -12,7 +12,7 @@ services:
     container_name: terraform
     image: hashicorp/terraform:1.2.1
     env_file:
-      - .env
+      - .env.terraform
     volumes:
       - ./terraform:/workspace
       - gcloud-config:/root/.config
