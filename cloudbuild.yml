@@ -1,5 +1,5 @@
 steps:
-  - id: build
+  - id: api:build
     name: "gcr.io/cloud-builders/docker"
     args:
       [
@@ -10,16 +10,30 @@ steps:
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
         ".",
       ]
-  - id: push
+  - id: api:push
     name: "gcr.io/cloud-builders/docker"
     args:
       ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}"]
-  - id: migrate
+  - id: db:build
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-f",
+        "./server/Dockerfile.migrate",
+        "-t",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db",
+        ".",
+      ]
+  - id: db:push
+    name: "gcr.io/cloud-builders/docker"
+    args: ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db"]
+  - id: db:migrate
     name: "gcr.io/google-appengine/exec-wrapper"
     entrypoint: "bash"
     args:
       - "-c"
-      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME} -e DATABASE_URL=$$DATABASE_URL -s instance -- npx prisma migrate deploy"
+      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=$$DATABASE_URL -s instance -- npx prisma migrate deploy"
     secretEnv: ["DATABASE_URL"]
 availableSecrets:
   secretManager:
