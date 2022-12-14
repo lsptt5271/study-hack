@@ -34,7 +34,7 @@ steps:
     entrypoint: "bash"
     args:
       - "-c"
-      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=postgresql://me:uniformnexttest@localhost/study-hack?socket=/cloudsql/study-hack:asia-northeast1:instance -s study-hack:asia-northeast1:instance -- npx prisma migrate deploy"
+      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=postgresql://me:uniformnexttest@localhost:5432/study-hack -s study-hack:asia-northeast1:instance=tcp:5432 -- npx prisma migrate deploy"
     waitFor: ["db:push"]
 timeout: 2000s
 images:
