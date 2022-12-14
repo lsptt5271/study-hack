@@ -34,8 +34,13 @@ steps:
     entrypoint: "bash"
     args:
       - "-c"
-      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=postgresql://me:uniformnexttest@localhost:5432/study-hack?host=/cloudsql/study-hack:asia-northeast1:instance -s study-hack:asia-northeast1:instance -- npx prisma migrate deploy"
+      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=$$MIGRATE_DATABASE_URL?host=/cloudsql/${_DB_CONNECTION_NAME} -s ${_DB_CONNECTION_NAME} -- npx prisma migrate deploy"
+    secretEnv: ["MIGRATE_DATABASE_URL"]
     waitFor: ["db:push"]
 timeout: 2000s
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/MIGRATE_DATABASE_URL/versions/latest
+      env: MIGRATE_DATABASE_URL
 images:
   - ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db
