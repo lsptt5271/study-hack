@@ -33,7 +33,7 @@ steps:
     entrypoint: "bash"
     args:
       - "-c"
-      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=$$DATABASE_URL -s instance -- npx prisma migrate deploy"
+      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=$$DATABASE_URL -s study-hack:asia-northeast1:instance -- npx prisma migrate deploy"
     secretEnv: ["DATABASE_URL"]
 availableSecrets:
   secretManager:
