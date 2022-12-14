@@ -40,23 +40,36 @@ resource "google_cloudbuild_trigger" "trigger" {
   }
 }
 
-# resource "google_cloud_run_service" "api" {
-#   name     = var.container_api
-#   location = var.region
+resource "google_cloud_run_service" "api" {
+  name     = var.container_api
+  location = var.region
 
-#   template {
-#     spec {
-#       containers {
-#         image = "${var.region}-docker.pkg.dev/${var.project}/${google_artifact_registry_repository.web.repository_id}/${var.container_api}"
-#         ports {
-#           container_port = 3001
-#         }
-#       }
-#     }
-#   }
+  template {
+    spec {
+      containers {
+        image = "${var.region}-docker.pkg.dev/${var.project}/${google_artifact_registry_repository.web.repository_id}/${var.container_api}"
+        ports {
+          container_port = 3001
+        }
+      }
+    }
+  }
 
-#   traffic {
-#     percent         = 100
-#     latest_revision = true
-#   }
-# }
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
+
+resource "google_cloud_run_service_iam_member" "cloud_run_member" {
+  location = var.region
+  service  = var.container_api
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+}
+
+module "cloud_sql" {
+  source = "../modules/cloud-sql"
+
+  region = var.region
+}
