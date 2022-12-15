@@ -1,5 +1,5 @@
 const BasePath = '/study_hack';
-const ApiDomain = 'localhost:3001';
+const ApiDomain = 'frontend-7mlp663pxa-an.a.run.app';
 const ApiBasePath = '/study_hack_api';
 
 /** @type {import('next').NextConfig} */
