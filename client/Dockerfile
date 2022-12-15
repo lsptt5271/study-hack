@@ -1,4 +1,4 @@
-FROM node:16.18.0-slim as builder
+FROM node:16.18.0-alpine as builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm install
 COPY ./client ./
 RUN npm run build
 
-FROM node:16.18.0-slim as runner
+FROM node:16.18.0-alpine as runner
 
 WORKDIR /usr/local/app
 
