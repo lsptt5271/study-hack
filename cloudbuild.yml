@@ -48,6 +48,19 @@ steps:
         "push",
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_API_NAME}",
       ]
+  - id: api:deploy
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "${_CONTAINER_API_NAME}",
+        "--image",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_API_NAME}",
+        "--region",
+        "asia-northeast1",
+      ]
   - id: db:build
     name: "gcr.io/cloud-builders/docker"
     args:

@@ -12,7 +12,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     BasePath,
     ApiBasePath,
-    ApiDestination: `http://${ApiDomain}${ApiBasePath}`,
+    ApiDestination: `https://${ApiDomain}${ApiBasePath}`,
   },
 };
 
