@@ -7,12 +7,16 @@ steps:
         "-f",
         "./client/Dockerfile",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/frontend",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_FRONTEND_NAME}",
         ".",
       ]
   - id: frontend:push
     name: "gcr.io/cloud-builders/docker"
-    args: ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/frontend"]
+    args:
+      [
+        "push",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_FRONTEND_NAME}",
+      ]
   - id: api:build
     name: "gcr.io/cloud-builders/docker"
     args:
@@ -21,13 +25,16 @@ steps:
         "-f",
         "./server/Dockerfile",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_API_NAME}",
         ".",
       ]
   - id: api:push
     name: "gcr.io/cloud-builders/docker"
     args:
-      ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}"]
+      [
+        "push",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_API_NAME}",
+      ]
   - id: db:build
     name: "gcr.io/cloud-builders/docker"
     args:
