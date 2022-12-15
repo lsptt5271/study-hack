@@ -6,6 +6,9 @@ const ApiBasePath = '/study_hack_api';
 const nextConfig = {
   basePath: BasePath,
   reactStrictMode: false,
+  experimental: {
+    outputStandalone: true,
+  },
   publicRuntimeConfig: {
     BasePath,
     ApiBasePath,

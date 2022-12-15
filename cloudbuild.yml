@@ -1,4 +1,19 @@
 steps:
+- id: frontend:build
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-f",
+        "./client/Dockerfile",
+        "-t",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/frontend",
+        ".",
+      ]
+  - id: frontend:push
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/frontend"]
   - id: api:build
     name: "gcr.io/cloud-builders/docker"
     args:

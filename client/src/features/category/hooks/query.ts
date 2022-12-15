@@ -6,6 +6,6 @@ export const useCustomGetCategoriesQuery = () => {
   const auth = useAuth();
 
   return useGetCategoriesQuery(getGraphqlClient(auth), {
-    userId: auth?.user.id,
+    userId: auth?.user.id || 0,
   });
 };

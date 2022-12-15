@@ -6,9 +6,12 @@ import { PageProps } from '@/pages/_app';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { PageMain } from '@/components/layouts/PageMain';
 
-const StudyPanel = dynamic(() => import('@/features/study/components/StudyPanel').then((module) => module.StudyPanel), {
-  ssr: false,
-});
+const StudyPanel = dynamic<{}>(
+  () => import('@/features/study/components/StudyPanel').then((module) => module.StudyPanel),
+  {
+    ssr: false,
+  }
+);
 
 type IndexPageProps = IndexServerSideProps;
 

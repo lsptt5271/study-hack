@@ -6,9 +6,12 @@ import { PageProps } from '@/pages/_app';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { PageMain } from '@/components/layouts/PageMain';
 
-const ConfigPanel = dynamic(() => import('@/features/config/components/ConfigPanel').then((module) => module.ConfigPanel), {
-  ssr: false,
-});
+const ConfigPanel = dynamic<{}>(
+  () => import('@/features/config/components/ConfigPanel').then((module) => module.ConfigPanel),
+  {
+    ssr: false,
+  }
+);
 
 type IndexPageProps = IndexServerSideProps;
 
