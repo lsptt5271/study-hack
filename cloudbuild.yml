@@ -60,6 +60,8 @@ steps:
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_API_NAME}",
         "--region",
         "asia-northeast1",
+        "--service-account",
+        "390066763775-compute@developer.gserviceaccount.com",
       ]
   - id: db:build
     name: "gcr.io/cloud-builders/docker"
