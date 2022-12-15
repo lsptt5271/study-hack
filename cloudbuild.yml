@@ -1,19 +1,19 @@
 steps:
-  # - id: api:build
-  #   name: "gcr.io/cloud-builders/docker"
-  #   args:
-  #     [
-  #       "build",
-  #       "-f",
-  #       "./server/Dockerfile",
-  #       "-t",
-  #       "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
-  #       ".",
-  #     ]
-  # - id: api:push
-  #   name: "gcr.io/cloud-builders/docker"
-  #   args:
-  #     ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}"]
+  - id: api:build
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-f",
+        "./server/Dockerfile",
+        "-t",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        ".",
+      ]
+  - id: api:push
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}"]
   - id: db:build
     name: "gcr.io/cloud-builders/docker"
     args:
