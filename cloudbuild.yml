@@ -63,7 +63,7 @@ steps:
         "${_REGION}",
         "--allow-unauthenticated",
         "--set-env-vars",
-        "DATABASE_URL=$$DATABASE_URL"
+        "DATABASE_URL=$$DATABASE_URL",
         "--add-cloudsql-instances",
         "${_DB_INSTANCE_NAME}",
       ]
@@ -87,8 +87,10 @@ steps:
     name: "gcr.io/google-appengine/exec-wrapper"
     entrypoint: "bash"
     args:
-      - "-c"
-      - "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=$$DATABASE_URL -s ${_DB_CONNECTION_NAME} -- npx prisma migrate deploy"
+      [
+        "-c",
+        "/buildstep/execute.sh -i ${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db -e DATABASE_URL=$$DATABASE_URL -s ${_DB_CONNECTION_NAME} -- npx prisma migrate deploy",
+      ]
     secretEnv: ["DATABASE_URL"]
     waitFor: ["db:push"]
 timeout: 2000s
