@@ -19,9 +19,9 @@ steps:
       ]
   - id: api:deploy
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: gcloud
     args:
       [
+        "gcloud"
         "run",
         "deploy",
         "${_CONTAINER_NAME}",
@@ -33,7 +33,7 @@ steps:
         "--port",
         "3001",
         "--set-env-vars",
-        "DATABASE_URL=${$$DATABASE_URL}",
+        "DATABASE_URL=$$DATABASE_URL",
         "--add-cloudsql-instances",
         "${_DB_CONNECTION_NAME}"
       ]
