@@ -10,6 +10,7 @@ steps:
     entrypoint: 'bash'
     args:
       [
+        '-c',
         'gcloud',
         'run',
         'deploy',
