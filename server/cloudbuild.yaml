@@ -21,7 +21,7 @@ steps:
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       [
-        "gcloud"
+        "gcloud",
         "run",
         "deploy",
         "${_CONTAINER_NAME}",
