@@ -61,7 +61,7 @@ steps:
         "--region",
         "asia-northeast1",
         "--add-cloudsql-instances",
-        "${DATABASE_CONNECTION_NAME}",
+        "instance",
       ]
     secretEnv: ["DATABASE_CONNECTION_NAME"]
   - id: db:build
