@@ -5,12 +5,11 @@ steps:
       [
         "build",
         "-f",
-        "Dockerfile",
+        "./server/Dockerfile",
         "-t",
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
         ".",
       ]
-    dir: "server"
   - id: api:push
     name: "gcr.io/cloud-builders/docker"
     args:
@@ -45,12 +44,11 @@ steps:
       [
         "build",
         "-f",
-        "Dockerfile.migrate",
+        "./server/Dockerfile.migrate",
         "-t",
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db",
         ".",
       ]
-    dir: "server"
   - id: db:push
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db"]
