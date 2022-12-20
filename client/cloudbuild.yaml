@@ -1,0 +1,35 @@
+steps:
+  - id: frontend:build
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-f",
+        "./client/Dockerfile",
+        "-t",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        ".",
+      ]
+  - id: frontend:push
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+      ]
+  - id: frontend:deploy
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "${_CONTAINER_NAME}",
+        "--image",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        "--region",
+        "${_REGION}",
+        "--allow-unauthenticated",
+        "--port",
+        "3000",
+      ]
