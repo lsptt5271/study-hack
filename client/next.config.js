@@ -1,6 +1,6 @@
-const BasePath = '/study_hack';
+const BasePath = '/study-hack';
 const ApiDomain = 'api-7mlp663pxa-an.a.run.app';
-const ApiBasePath = '/study_hack_api';
+const ApiBasePath = '/study-hack-api';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

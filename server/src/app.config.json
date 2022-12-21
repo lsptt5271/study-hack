@@ -1,5 +1,5 @@
 {
-    "context_path": "/study_hack_api/",
+    "context_path": "/study-hack-api/",
     "server_port": 3001,
     "log_dir": "/usr/local/app/server/logs",
     "image_dir": "/usr/local/app/server/images",
