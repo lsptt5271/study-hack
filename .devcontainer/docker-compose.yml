@@ -24,16 +24,5 @@ services:
       POSTGRES_DB: study_hack
     volumes:
       - db_data:/var/lib/posrgresql/data
-  www:
-    container_name: study_hack_www
-    image: httpd:2.4
-    ports:
-      - 80:80
-    volumes:
-      - ../httpd.conf:/usr/local/apache2/conf/httpd.conf
-    environment:
-      APP_URL: http://app:3000/
-      APP_API_URL: http://app:3001/
-      APP_WS: ws://app:3000/
 volumes:
   db_data:
