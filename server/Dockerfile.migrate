@@ -1,10 +1,11 @@
 FROM node:16.18.0-alpine
 
-WORKDIR /usr/local/app
+WORKDIR /workspace
 
-COPY ./server/package*.json ./
+COPY package*.json ./
+COPY prisma ./prisma
 RUN npm install
 
-COPY ./server ./
+COPY . .
 
 CMD ["npx", "prisma", "migrate", "deploy"]

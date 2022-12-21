@@ -16,7 +16,8 @@ steps:
     secretEnv: ['DATABASE_URL']
   - id: db:build
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', './server/Dockerfile.migrate', '-t', '${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db', '.']
+    args: ['build', '-f', 'Dockerfile.migrate', '-t', '${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db', '.']
+    dir: 'server'
   - id: db:push
     name: 'gcr.io/cloud-builders/docker'
     args: ['push', '${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/db']
