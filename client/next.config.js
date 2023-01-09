@@ -1,5 +1,5 @@
 const BasePath = '/study-hack';
-const ApiDomain = 'api-7mlp663pxa-an.a.run.app';
+const ApiDomain = 'localhost:3001';
 const ApiBasePath = '/study-hack-api';
 
 /** @type {import('next').NextConfig} */
@@ -12,7 +12,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     BasePath,
     ApiBasePath,
-    ApiDestination: `https://${ApiDomain}${ApiBasePath}`,
+    ApiDestination: `http://${ApiDomain}${ApiBasePath}`,
   },
 };
 
