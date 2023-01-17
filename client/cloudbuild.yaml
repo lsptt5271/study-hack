@@ -7,7 +7,7 @@ steps:
         "-f",
         "./client/Dockerfile",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        "${_IMAGE_PATH}$SHORT_SHA",
         ".",
       ]
   - id: frontend:push
@@ -15,7 +15,7 @@ steps:
     args:
       [
         "push",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        "${_IMAGE_PATH}$SHORT_SHA",
       ]
   - id: frontend:deploy
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
@@ -24,12 +24,14 @@ steps:
       [
         "run",
         "deploy",
-        "${_CONTAINER_NAME}",
+        "${_SERVICE_NAME}",
         "--image",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/${_CONTAINER_NAME}",
+        "${_IMAGE_PATH}$SHORT_SHA",
         "--region",
         "${_REGION}",
         "--allow-unauthenticated",
         "--port",
         "3000",
       ]
+images:
+  - ${_IMAGE_PATH}$SHORT_SHA
