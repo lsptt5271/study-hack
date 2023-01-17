@@ -11,7 +11,7 @@ steps:
     args:
       [
         '-c',
-        'gcloud run deploy ${_CONTAINER_NAME} --image ${_API_IMAGE_PATH}$SHORT_SHA --region ${_REGION} --allow-unauthenticated --port 3001 --set-env-vars DATABASE_URL=$$DATABASE_URL --add-cloudsql-instances ${_DB_CONNECTION_NAME}',
+        'gcloud run deploy ${_SERVICE_NAME} --image ${_API_IMAGE_PATH}$SHORT_SHA --region ${_REGION} --allow-unauthenticated --port 3001 --set-env-vars DATABASE_URL=$$DATABASE_URL --add-cloudsql-instances ${_DB_CONNECTION_NAME}',
       ]
     secretEnv: ['DATABASE_URL']
   - id: db:build
