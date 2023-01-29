@@ -3,11 +3,10 @@ import { useForm } from 'react-hook-form';
 
 import { FormField } from '@/components/elements/FormField';
 import { Textbox } from '@/components/elements/Textbox';
-import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
-import { useCreateCategoryMutation } from '@/repositories/graphql';
 import { useCategoryModal } from '@/features/category/components/CategoryModal/hook';
-import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
+import { createCateogryMutationAtom } from '@/features/category/hooks/api';
+import { useAtomValue } from 'jotai';
 
 export type CategoryFormHandles = {
   submit(): void;
@@ -22,8 +21,7 @@ type CategoryFormProps = {};
 export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
   const auth = useAuth();
   const { hideCategoryModal } = useCategoryModal();
-  const mutation = useCreateCategoryMutation(getGraphqlClient(auth));
-  const getCategoriesQuery = useCustomGetCategoriesQuery();
+  const createCategoryMutation = useAtomValue(createCateogryMutationAtom);
 
   const {
     register,
@@ -37,13 +35,12 @@ export const CategoryForm = forwardRef<CategoryFormProps>(({}, ref) => {
     submit: handleSubmit((data) => {
       if (!auth) return;
 
-      mutation
-        .mutateAsync({
+      createCategoryMutation
+        .mutate({
           input: {
             name: data.name,
           },
         })
-        .then(() => getCategoriesQuery.refetch())
         .then(() => hideCategoryModal());
     }),
   }));

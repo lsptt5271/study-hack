@@ -1,10 +1,9 @@
+import { useAtomValue } from 'jotai';
 import { useMemo } from 'react';
-import { useCustomGetCategoriesQuery } from './query';
+import { getCategoriesAtom } from './api';
 
 export const useCategoriesStore = () => {
-  const getCategoriesQuery = useCustomGetCategoriesQuery();
-
-  const categories = useMemo(() => getCategoriesQuery.data?.categories || [], [getCategoriesQuery.data]);
+  const { categories } = useAtomValue(getCategoriesAtom);
 
   return { categories };
 };

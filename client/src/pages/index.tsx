@@ -5,6 +5,7 @@ import getAuth from '@/utils/get-auth';
 import { PageProps } from '@/pages/_app';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { PageMain } from '@/components/layouts/PageMain';
+import { AuthProvider } from '@/providers/auth';
 
 const StudyPanel = dynamic<{}>(
   () => import('@/features/study/components/StudyPanel').then((module) => module.StudyPanel),
@@ -17,10 +18,10 @@ type IndexPageProps = IndexServerSideProps;
 
 const IndexPage = ({ auth }: IndexPageProps) => {
   return (
-    <>
+    <AuthProvider auth={auth}>
       <PageHeader />
       <PageMain>{auth ? <StudyPanel /> : <article>トップページ的なもの</article>}</PageMain>
-    </>
+    </AuthProvider>
   );
 };
 

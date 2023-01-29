@@ -3,13 +3,12 @@ import { useForm } from 'react-hook-form';
 
 import { FormField } from '@/components/elements/FormField';
 import { Textbox } from '@/components/elements/Textbox';
-import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
-import { useCreateMenuMutation } from '@/repositories/graphql';
 import { useMenuModal } from '@/features/menu/components/MenuModal/hook';
-import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
 import { SelectBox } from '@/components/elements/SelectBox';
 import { useCategoriesStore } from '@/features/category/hooks/store';
+import { useAtomValue } from 'jotai';
+import { createMenuMutationAtom } from '../../hooks/api';
 
 export type MenuFormHandles = {
   submit(): void;
@@ -26,9 +25,8 @@ type MenuFormProps = {};
 export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
   const auth = useAuth();
   const { hideMenuModal } = useMenuModal();
-  const mutation = useCreateMenuMutation(getGraphqlClient(auth));
+  const createMenuMutation = useAtomValue(createMenuMutationAtom);
   const { categories } = useCategoriesStore();
-  const getCategoriesQuery = useCustomGetCategoriesQuery();
 
   const {
     register,
@@ -42,15 +40,14 @@ export const MenuForm = forwardRef<MenuFormProps>(({}, ref) => {
     submit: handleSubmit((data) => {
       if (!auth) return;
 
-      mutation
-        .mutateAsync({
+      createMenuMutation
+        .mutate({
           input: {
             name: data.name,
             image: data.image[0],
             categoryId: parseInt(data.category),
           },
         })
-        .then(() => getCategoriesQuery.refetch())
         .then(() => hideMenuModal());
     }),
   }));

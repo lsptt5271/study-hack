@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { useAuth } from '@/providers/auth';
@@ -31,5 +31,17 @@ export const MenuImage = ({ menuId }: MenuImageProps) => {
     staleTime: 500,
   });
 
-  return <>{query.data && <Image src={`data:${query.data.mineType};base64,${query.data.base64}`} alt="" width={98} height={98} objectFit="contain" />}</>;
+  return (
+    <>
+      {query.data && (
+        <Image
+          src={`data:${query.data.mineType};base64,${query.data.base64}`}
+          alt=""
+          width={98}
+          height={98}
+          objectFit="contain"
+        />
+      )}
+    </>
+  );
 };

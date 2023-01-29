@@ -4,12 +4,12 @@ import { useCallback } from 'react';
 
 import { PrimaryButton } from '@/components/elements/PrimaryButton';
 import { Textbox } from '@/components/elements/Textbox';
-import { getGraphqlClient } from '@/libs/graphql-client';
-import { useRegisterUserMutation } from '@/repositories/graphql';
 import setAccessToken from '@/utils/set-access-token';
 import { PagePath } from '@/commons/constant';
 import { SignupFormError } from '@/features/signup/components/SignupFormError';
 import axios from '@/libs/axios';
+import { useAtomValue } from 'jotai';
+import { registerUserMutationAtom } from '../../hooks/api';
 
 type SignupFormState = {
   name: string;
@@ -21,6 +21,7 @@ type SignupFormProps = {};
 
 export const SignupForm = ({}: SignupFormProps) => {
   const router = useRouter();
+  const registerUserMutation = useAtomValue(registerUserMutationAtom);
   const {
     register,
     handleSubmit,
@@ -30,8 +31,8 @@ export const SignupForm = ({}: SignupFormProps) => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    mutation
-      .mutateAsync({
+    registerUserMutation
+      .mutate({
         input: data,
       })
       .then((data) => {
@@ -43,8 +44,6 @@ export const SignupForm = ({}: SignupFormProps) => {
         console.log(e);
       });
   });
-
-  const mutation = useRegisterUserMutation(getGraphqlClient());
 
   const hasWhiteSpace = useCallback((value: string) => {
     if (value.indexOf(' ') !== -1 || value.indexOf(' ') !== -1) {

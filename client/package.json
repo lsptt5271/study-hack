@@ -16,16 +16,19 @@
     "cy:run": "cypress run"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.23.0",
+    "@tanstack/react-query-devtools": "^4.23.0",
     "axios": "^0.27.2",
     "graphql-request": "^4.3.0",
-    "jotai": "^1.7.4",
+    "graphql-tag": "^2.12.6",
+    "jotai": "^1.13.1",
+    "jotai-tanstack-query": "^0.4.0",
     "lodash": "^4.17.21",
     "next": "12.2.0",
     "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.38.0",
-    "react-query": "^3.39.1",
     "tailwind-override": "^0.6.1"
   },
   "devDependencies": {

@@ -4,29 +4,24 @@ import { List } from '@/components/elements/List';
 import { ListColumn } from '@/components/elements/ListColumn';
 import { ListRow } from '@/components/elements/ListRow';
 import { useMenuModal } from '@/features/menu/components/MenuModal/hook';
-import { getGraphqlClient } from '@/libs/graphql-client';
 import { useAuth } from '@/providers/auth';
-import { useDeleteMenuMutation } from '@/repositories/graphql';
 import { MaterialIcon } from '@/components/elements/MaterialIcon';
 import { MenuImage } from '@/components/elements/MenuImage';
 import { useMenusStore } from '@/features/menu/hooks/store';
-import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
+import { useAtomValue } from 'jotai';
+import { deleteMenuMutationAtom } from '../../hooks/api';
 
 type MenuListProps = {
   isConfig?: boolean;
 };
 
 export const MenuList = ({ isConfig }: MenuListProps) => {
-  const auth = useAuth();
   const { showMenuModal } = useMenuModal();
   const { menus } = useMenusStore();
-  const getCategoriesQuery = useCustomGetCategoriesQuery();
-  const deleteMenuMutation = useDeleteMenuMutation(getGraphqlClient(auth));
+  const deleteMenuMutation = useAtomValue(deleteMenuMutationAtom);
 
   const onClickDelete = useCallback((menuId: number) => {
-    deleteMenuMutation.mutateAsync({ input: { menuId } }).then(() => {
-      getCategoriesQuery.refetch();
-    });
+    deleteMenuMutation.mutate({ input: { menuId } });
   }, []);
 
   const headerListColumnDynamicClassName = useMemo(() => {

@@ -5,27 +5,22 @@ import { ListColumn } from '@/components/elements/ListColumn';
 import { ListRow } from '@/components/elements/ListRow';
 import { useCategoryModal } from '@/features/category/components/CategoryModal/hook';
 import { getGraphqlClient } from '@/libs/graphql-client';
-import { useAuth } from '@/providers/auth';
-import { useDeleteCategoryMutation } from '@/repositories/graphql';
-import { useCustomGetCategoriesQuery } from '@/features/category/hooks/query';
 import { MaterialIcon } from '@/components/elements/MaterialIcon';
 import { useCategoriesStore } from '@/features/category/hooks/store';
+import { useAtomValue } from 'jotai';
+import { deleteCateogryMutationAtom } from '../../hooks/api';
 
 type CategoryListProps = {
   isConfig?: boolean;
 };
 
 export const CategoryList = ({ isConfig = false }: CategoryListProps) => {
-  const auth = useAuth();
   const { showCategoryModal } = useCategoryModal();
   const { categories } = useCategoriesStore();
-  const getCategoriesQuery = useCustomGetCategoriesQuery();
-  const deleteCategoryMutation = useDeleteCategoryMutation(getGraphqlClient(auth));
+  const deleteCategoryMutation = useAtomValue(deleteCateogryMutationAtom);
 
   const onClickDelete = useCallback((categoryId: number) => {
-    deleteCategoryMutation.mutateAsync({ input: { categoryId: categoryId } }).then(() => {
-      getCategoriesQuery.refetch();
-    });
+    deleteCategoryMutation.mutate({ input: { categoryId: categoryId } });
   }, []);
 
   const headerListColumnDynamicClassName = useMemo(() => {

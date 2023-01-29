@@ -1,4 +1,6 @@
-import { QueryClient } from 'react-query';
+import { QueryClient } from '@tanstack/react-query';
+import { useAtomValue } from 'jotai';
+import { queryClientAtom } from 'jotai-tanstack-query';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,3 +14,9 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+export const useQueryClient = () => {
+  const queryClient = useAtomValue(queryClientAtom);
+
+  return queryClient;
+};
